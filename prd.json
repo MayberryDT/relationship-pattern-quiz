@@ -1,0 +1,100 @@
+{
+    "project": "Relationship Pattern Diagnostic",
+    "branchName": "ralph/relationship-pattern-diagnostic",
+    "description": "Relationship Pattern Diagnostic - A psychologically-informed diagnostic quiz with weighted pattern matching.",
+    "userStories": [
+        {
+            "id": "US-001",
+            "title": "Content System (CMS) Schema Setup",
+            "description": "As a content manager, I need a database structure to store questions, answers, and their associated weights so that I can tune the diagnostic engine without redeploying the app.",
+            "acceptanceCriteria": [
+                "Create `questions` table (id, text, type [mc/text], phase [early/mid/late]) in Supabase",
+                "Create `answers` table (id, question_id, text, weight_pattern, weight_driver, weight_reinforcement) in Supabase",
+                "Create `results` table (id, cluster_id, type [primary/secondary], content_markdown) in Supabase",
+                "Seed initial data with placeholder content for all 5 clusters",
+                "Typecheck passes"
+            ],
+            "priority": 1,
+            "passes": true,
+            "notes": "Supabase project created (bzsjivgykaclmmovugiz), tables defined and seeded."
+        },
+        {
+            "id": "US-002",
+            "title": "Diagnostic Engine (State Management)",
+            "description": "As a user, I need the system to track my internal 'Vulnerability' scores across three axes as I answer questions, without assigning me to a fixed path.",
+            "acceptanceCriteria": [
+                "Implement a state machine/store to track scores for: Pattern Axis, Driver Axis, Reinforcement Axis",
+                "Logic to update weighted probabilities when an answer is selected",
+                "Logic to pair Primary + Secondary vulnerabilities based on the 'Internal Matrix' rules",
+                "Unit tests to verify that specific answer combinations lead to expected Clusters (C1-C5)",
+                "Typecheck passes"
+            ],
+            "priority": 2,
+            "passes": false,
+            "notes": ""
+        },
+        {
+            "id": "US-003",
+            "title": "Quiz Interface - Phase 1 & 2 (Multiple Choice)",
+            "description": "As a user, I want a clean, clinical interface to answer multiple-choice questions so that I can progress through the diagnostic with low friction.",
+            "acceptanceCriteria": [
+                "Render questions one by one with a progress indicator",
+                "Interface adheres to 'Clean & Clinical' aesthetic (minimalist, serif fonts, trustworthy)",
+                "Smooth transitions between questions",
+                "Display 'early' and 'mid' phase questions",
+                "Handle conditional logic if data supports it",
+                "Typecheck passes",
+                "Verify in browser using dev-browser skill"
+            ],
+            "priority": 3,
+            "passes": false,
+            "notes": ""
+        },
+        {
+            "id": "US-004",
+            "title": "Quiz Interface - Phase 3 (Reflections)",
+            "description": "As a user, I want to answer open-ended reflection questions to deepen my emotional investment in the process.",
+            "acceptanceCriteria": [
+                "Support text-area input for 'Written Reflections'",
+                "Store reflections in local state",
+                "Ensure styling matches clinical aesthetic",
+                "Typecheck passes",
+                "Verify in browser using dev-browser skill"
+            ],
+            "priority": 4,
+            "passes": false,
+            "notes": ""
+        },
+        {
+            "id": "US-005",
+            "title": "Results Teaser & Payment Gate",
+            "description": "As a user, upon finishing the quiz, I want to see a revealing teaser of my results and an option to unlock the full report.",
+            "acceptanceCriteria": [
+                "Calculate final result (Primary + Secondary) locally",
+                "Display 'Teaser' view: Summary with blurred details",
+                "Integrate Stripe Checkout (or mock for dev) for payment",
+                "Handle 'Unlock' state post-payment",
+                "Typecheck passes",
+                "Verify in browser using dev-browser skill"
+            ],
+            "priority": 5,
+            "passes": false,
+            "notes": ""
+        },
+        {
+            "id": "US-006",
+            "title": "Full Report Rendering",
+            "description": "As a paid user, I want to read my full, detailed diagnostic report to understand my relationship patterns.",
+            "acceptanceCriteria": [
+                "Render the full report content fetched from the DB based on the calculated result",
+                "Sections: Combined Profile, Internal Deep Dives, Interaction Layer",
+                "Aesthetics: Web-native, scrollable, editorial style",
+                "Typecheck passes",
+                "Verify in browser using dev-browser skill"
+            ],
+            "priority": 6,
+            "passes": false,
+            "notes": ""
+        }
+    ]
+}

@@ -1,0 +1,19 @@
+# Ralph Progress Log
+Started: 2026-01-21
+
+## Codebase Patterns
+- **CMS Driven**: All quiz content (questions, answers, results) is fetched from Supabase.
+- **State Management**: Uses a client-side store (likely Zustand or React Context) to track weights across 3 axes.
+- **Stateless/Anonymous**: No user authentication. State is ephemeral or re-hydrated via payment tokens.
+- **Styling**: "Clean & Clinical" aesthetic. Minimalist, Serif headers, Sans-serif body.
+---
+
+## 2026-01-21 - US-001
+- Project initialized with Vite (React + TS).
+- Supabase project created: `bzsjivgykaclmmovugiz`.
+- Schema established: `questions`, `answers`, `results` tables with RLS and policies.
+- Initial seed data added for the first question and 5 primary clusters.
+- **Learnings for future iterations:**
+  - `create-vite` requires an empty directory or manual merging if the directory contains files like `.agent`.
+  - Supabase `gen_random_uuid()` is preferred for primary keys in this stateless architecture.
+---
