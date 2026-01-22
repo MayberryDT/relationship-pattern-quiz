@@ -3,10 +3,11 @@ import { supabase } from '../lib/supabase';
 import { useQuizStore } from '../store/useQuizStore';
 import ProgressBar from './ProgressBar';
 import QuestionCard from './QuestionCard';
+import ResultsTeaser from './ResultsTeaser';
 import type { Question, Answer } from '../types';
 
 const QuizView: React.FC = () => {
-    const { currentQuestionIndex, addAnswer, addReflection, nextQuestion, answers } = useQuizStore();
+    const { currentQuestionIndex, addAnswer, addReflection, nextQuestion, answers, isUnlocked } = useQuizStore();
     const [questions, setQuestions] = useState<Question[]>([]);
     const [currentAnswers, setCurrentAnswers] = useState<Answer[]>([]);
     const [loading, setLoading] = useState(true);
@@ -73,10 +74,13 @@ const QuizView: React.FC = () => {
     }
 
     if (currentQuestionIndex >= questions.length && questions.length > 0) {
+        if (!isUnlocked) {
+            return <ResultsTeaser />;
+        }
         return (
             <div className="container text-center">
-                <h1 className="serif question-text">Diagnostic Complete</h1>
-                <p className="question-subtext text-secondary">Analyzing your profile...</p>
+                <h1 className="serif question-text">Diagnostic Unlocked</h1>
+                <p className="question-subtext text-secondary">Loading your full report...</p>
             </div>
         );
     }

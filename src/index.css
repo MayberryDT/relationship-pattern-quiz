@@ -188,6 +188,63 @@ body {
   background: #FFF;
 }
 
+/* Teaser & Paywall */
+.teaser-view {
+  animation: fadeIn 1s ease-out;
+}
+
+.teaser-title {
+  font-size: 2.5rem;
+  margin-bottom: 2rem;
+}
+
+.teaser-content {
+  position: relative;
+  margin-bottom: 4rem;
+  border-left: 2px solid var(--accent-warm);
+  padding-left: 2rem;
+}
+
+.teaser-blur-overlay {
+  position: relative;
+}
+
+.blurred-text {
+  filter: blur(8px);
+  user-select: none;
+  opacity: 0.5;
+  margin-top: 1rem;
+}
+
+.paywall-card {
+  background: var(--card-surface);
+  border: 1px solid var(--border-color);
+  padding: 3rem;
+  text-align: center;
+  box-shadow: var(--shadow-hover);
+}
+
+.paywall-card h2 {
+  margin-bottom: 1rem;
+}
+
+.paywall-card p {
+  margin-bottom: 2rem;
+  color: var(--text-secondary);
+}
+
+.mt-4 {
+  margin-top: 1rem;
+}
+
+.mb-4 {
+  margin-bottom: 1rem;
+}
+
+.text-center {
+  text-align: center;
+}
+
 /* Nav */
 .nav-actions {
   display: flex;

@@ -46,3 +46,12 @@ Started: 2026-01-21
   - `textarea` styling needs to be distinct from `option-item` to signal a shift in diagnostic depth.
   - Seeding reflections as 'late' phase questions ensures they appear after the quantitative multiple-choice section.
 ---
+
+## 2026-01-21 - US-005
+- Developed `ResultsTeaser` with blurred content overlay and paywall card.
+- Implemented mock payment flow to trigger "Unlocked" application state.
+- Connected quiz completion logic to the Teaser view.
+- **Learnings for future iterations:**
+  - `ResultsTeaser` serves as the critical conversion point; typography here must be the most premium in the app.
+  - Using a blurred overlay instead of just hiding content increases user curiosity and perceived value.
+---

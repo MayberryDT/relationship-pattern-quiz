@@ -78,8 +78,8 @@
                 "Verify in browser using dev-browser skill"
             ],
             "priority": 5,
-            "passes": false,
-            "notes": ""
+            "passes": true,
+            "notes": "ResultsTeaser component implemented with blurred text and payment mock. Logic to calculate primary/secondary results locally and handle 'Unlock' state verified."
         },
         {
             "id": "US-006",
