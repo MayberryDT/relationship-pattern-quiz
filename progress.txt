@@ -27,3 +27,13 @@ Started: 2026-01-21
   - Using `addAnswer` to accumulate weights allows for a dynamic "Probability Engine" as requested.
   - Test-driven development revealed edge cases in secondary cluster thresholding.
 ---
+
+## 2026-01-21 - US-003
+- Created `Supabase` client and environment configuration.
+- Developed `ProgressBar`, `QuestionCard`, and `QuizView` components.
+- Applied "Editorial Serenity" design system globally via `index.css`.
+- Verified dynamic question fetching and transition logic in the browser.
+- **Learnings for future iterations:**
+  - CSS animations (`fadeIn`) significantly enhance the "Clinical" trust vibe.
+  - Ensuring the `Continue` button is disabled until selection prevents invalid state transitions.
+---
