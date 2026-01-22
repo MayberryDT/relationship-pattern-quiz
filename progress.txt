@@ -17,3 +17,13 @@ Started: 2026-01-21
   - `create-vite` requires an empty directory or manual merging if the directory contains files like `.agent`.
   - Supabase `gen_random_uuid()` is preferred for primary keys in this stateless architecture.
 ---
+
+## 2026-01-21 - US-002
+- Implemented `useQuizStore` with Zustand and persistence.
+- Added axis scoring logic (Pattern, Driver, Reinforcement).
+- Implemented `getRecommendedClusters` algorithm for Primary/Secondary diagnostic matching.
+- Developed comprehensive unit tests in Vitest covering scoring and pairing.
+- **Learnings for future iterations:**
+  - Using `addAnswer` to accumulate weights allows for a dynamic "Probability Engine" as requested.
+  - Test-driven development revealed edge cases in secondary cluster thresholding.
+---
