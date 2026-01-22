@@ -6,7 +6,7 @@ import QuestionCard from './QuestionCard';
 import type { Question, Answer } from '../types';
 
 const QuizView: React.FC = () => {
-    const { currentQuestionIndex, addAnswer, nextQuestion, answers } = useQuizStore();
+    const { currentQuestionIndex, addAnswer, addReflection, nextQuestion, answers } = useQuizStore();
     const [questions, setQuestions] = useState<Question[]>([]);
     const [currentAnswers, setCurrentAnswers] = useState<Answer[]>([]);
     const [loading, setLoading] = useState(true);
@@ -57,8 +57,13 @@ const QuizView: React.FC = () => {
     };
 
     const handleContinue = () => {
-        if (selectedAnswer && questions[currentQuestionIndex]) {
-            addAnswer(questions[currentQuestionIndex].id, selectedAnswer);
+        const currentQuestion = questions[currentQuestionIndex];
+        if (selectedAnswer && currentQuestion) {
+            if (currentQuestion.type === 'text') {
+                addReflection(currentQuestion.id, selectedAnswer.text);
+            } else {
+                addAnswer(currentQuestion.id, selectedAnswer);
+            }
             nextQuestion();
         }
     };

@@ -170,6 +170,24 @@ body {
   font-weight: 400;
 }
 
+.reflection-input {
+  width: 100%;
+  min-height: 150px;
+  padding: 1.5rem;
+  font-family: 'Inter', sans-serif;
+  font-size: 1rem;
+  border: 1px solid var(--border-color);
+  background: var(--bg-color);
+  resize: vertical;
+  transition: var(--transition-smooth);
+}
+
+.reflection-input:focus {
+  outline: none;
+  border-color: var(--accent-warm);
+  background: #FFF;
+}
+
 /* Nav */
 .nav-actions {
   display: flex;

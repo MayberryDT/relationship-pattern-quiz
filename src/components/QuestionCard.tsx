@@ -27,23 +27,31 @@ const QuestionCard: React.FC<QuestionCardProps> = ({
             </p>
 
             <div className="options-grid">
-                {answers.map((answer) => (
-                    <label
-                        key={answer.id}
-                        className={`option-item ${selectedAnswerId === answer.id ? 'selected' : ''}`}
-                        onClick={() => onSelect(answer)}
-                    >
-                        <div className="option-radio" />
-                        <span className="option-text">{answer.text}</span>
-                        <input
-                            type="radio"
-                            name={`q-${question.id}`}
-                            checked={selectedAnswerId === answer.id}
-                            onChange={() => { }} // Controlled by label click
-                            style={{ display: 'none' }}
-                        />
-                    </label>
-                ))}
+                {question.type === 'mc' ? (
+                    answers.map((answer) => (
+                        <label
+                            key={answer.id}
+                            className={`option-item ${selectedAnswerId === answer.id ? 'selected' : ''}`}
+                            onClick={() => onSelect(answer)}
+                        >
+                            <div className="option-radio" />
+                            <span className="option-text">{answer.text}</span>
+                            <input
+                                type="radio"
+                                name={`q-${question.id}`}
+                                checked={selectedAnswerId === answer.id}
+                                onChange={() => { }} // Controlled by label click
+                                style={{ display: 'none' }}
+                            />
+                        </label>
+                    ))
+                ) : (
+                    <textarea
+                        className="reflection-input"
+                        placeholder="Type your reflection here..."
+                        onChange={(e) => onSelect({ id: 'text', text: e.target.value } as any)}
+                    />
+                )}
             </div>
 
             <div className="nav-actions">

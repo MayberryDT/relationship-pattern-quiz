@@ -37,3 +37,12 @@ Started: 2026-01-21
   - CSS animations (`fadeIn`) significantly enhance the "Clinical" trust vibe.
   - Ensuring the `Continue` button is disabled until selection prevents invalid state transitions.
 ---
+
+## 2026-01-21 - US-004
+- Added support for open-ended 'text' reflection questions.
+- Updated `QuestionCard` to dynamically render `textarea` for reflection phase.
+- Implemented `addReflection` logic in `QuizView` to store long-form qualitative data.
+- **Learnings for future iterations:**
+  - `textarea` styling needs to be distinct from `option-item` to signal a shift in diagnostic depth.
+  - Seeding reflections as 'late' phase questions ensures they appear after the quantitative multiple-choice section.
+---
