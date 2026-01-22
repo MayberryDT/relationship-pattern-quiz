@@ -1,100 +1,243 @@
 {
     "project": "Relationship Pattern Diagnostic",
-    "branchName": "ralph/relationship-pattern-diagnostic",
-    "description": "Relationship Pattern Diagnostic - A psychologically-informed diagnostic quiz with weighted pattern matching.",
+    "branchName": "ralph/v2-production-ready",
+    "description": "Relationship Pattern Diagnostic - Full implementation with psychologically-grounded quiz, real payments, and hybrid AI reports.",
     "userStories": [
         {
             "id": "US-001",
-            "title": "Content System (CMS) Schema Setup",
-            "description": "As a content manager, I need a database structure to store questions, answers, and their associated weights so that I can tune the diagnostic engine without redeploying the app.",
+            "title": "Enhanced Content Schema (Clusters & Pairings)",
+            "description": "As a system, I need a database schema that can hold rich content blocks for clusters and their specific interactions so the report can be assembled dynamically.",
             "acceptanceCriteria": [
-                "Create `questions` table (id, text, type [mc/text], phase [early/mid/late]) in Supabase",
-                "Create `answers` table (id, question_id, text, weight_pattern, weight_driver, weight_reinforcement) in Supabase",
-                "Create `results` table (id, cluster_id, type [primary/secondary], content_markdown) in Supabase",
-                "Seed initial data with placeholder content for all 5 clusters",
+                "Update `clusters` table with fields for: 1-sentence reveal, early/mid/stress deep-dives, misreads, protective logic",
+                "Create `pairings` table for the primary-secondary matrix with interaction narrations and timeline sequences",
+                "Add support for internal 'disallowed pairing' rationale for debugging",
                 "Typecheck passes"
             ],
             "priority": 1,
             "passes": true,
-            "notes": "Supabase project created (bzsjivgykaclmmovugiz), tables defined and seeded."
+            "notes": "Schema updated with clusters and pairings tables. Types and store logic updated for flags and enhanced metadata."
         },
         {
             "id": "US-002",
-            "title": "Diagnostic Engine (State Management)",
-            "description": "As a user, I need the system to track my internal 'Vulnerability' scores across three axes as I answer questions, without assigning me to a fixed path.",
+            "title": "Content Seeding (The Big Content Pack)",
+            "description": "As a user, I want the report to feel authoritative and deep, so the database needs to be seeded with the canonical 5-cluster library.",
             "acceptanceCriteria": [
-                "Implement a state machine/store to track scores for: Pattern Axis, Driver Axis, Reinforcement Axis",
-                "Logic to update weighted probabilities when an answer is selected",
-                "Logic to pair Primary + Secondary vulnerabilities based on the 'Internal Matrix' rules",
-                "Unit tests to verify that specific answer combinations lead to expected Clusters (C1-C5)",
+                "Seed `clusters` table with full C1-C5 content packs (12-page report sections equivalent)",
+                "Seed `pairings` matrix with allowed (Primary + Secondary) interaction narratives",
+                "Verify all content blocks are correctly mapped to their respective IDs",
                 "Typecheck passes"
             ],
             "priority": 2,
             "passes": true,
-            "notes": "Zustand store implemented with persistent state. Scoring logic and primary/secondary cluster determination verified by Vitest unit tests."
+            "notes": "Canonical 5-cluster library (C1-C5) and initial pairing narratives seeded in Supabase."
         },
         {
             "id": "US-003",
-            "title": "Quiz Interface - Phase 1 & 2 (Multiple Choice)",
-            "description": "As a user, I want a clean, clinical interface to answer multiple-choice questions so that I can progress through the diagnostic with low friction.",
+            "title": "Advanced Question Bank & Gating Logic",
+            "description": "As a diagnostic tool, I need a detailed question bank that uses conditional gating and confidence modifiers to accurately place users.",
             "acceptanceCriteria": [
-                "Render questions one by one with a progress indicator",
-                "Interface adheres to 'Clean & Clinical' aesthetic (minimalist, serif fonts, trustworthy)",
-                "Smooth transitions between questions",
-                "Display 'early' and 'mid' phase questions",
-                "Handle conditional logic if data supports it",
-                "Typecheck passes",
-                "Verify in browser using dev-browser skill"
+                "Update `questions` and `answers` schema to support: gating flags, min/max prob triggers, and confidence modifiers",
+                "Seed full inventory for Phases 1-4 (segmentation, differentiation, reinforcement, reflection)",
+                "Implement data-driven routing primitives (Flags, Scores vector)",
+                "Typecheck passes"
             ],
             "priority": 3,
             "passes": true,
-            "notes": "Quiz interface implemented with 'Editorial Serenity' theme. Supabase fetching for Phase 1 & 2 integration verified via browser testing."
+            "notes": "Gating logic (required_flags, min_scores) implemented in QuizView. Full Phase 1-4 seed inventory added via SQL."
         },
         {
             "id": "US-004",
-            "title": "Quiz Interface - Phase 3 (Reflections)",
-            "description": "As a user, I want to answer open-ended reflection questions to deepen my emotional investment in the process.",
+            "title": "Stripe Production Checkout Flow",
+            "description": "As a business, I want to accept real payments using Stripe Checkout before unlocking the full report content.",
             "acceptanceCriteria": [
-                "Support text-area input for 'Written Reflections'",
-                "Store reflections in local state",
-                "Ensure styling matches clinical aesthetic",
-                "Typecheck passes",
-                "Verify in browser using dev-browser skill"
+                "Replace mock payment with real Stripe Checkout integration",
+                "Configure production product and price ($7-$9 range)",
+                "Implement Success and Cancel redirect URLs",
+                "Verify checkout flow opens correctly in browser",
+                "Typecheck passes"
             ],
             "priority": 4,
             "passes": true,
-            "notes": "Reflection phase implemented. Support for 'text' type questions added to QuestionCard. State saved to reflections record in store."
+            "notes": "Stripe product and price ($9) created. create-checkout-session edge function deployed and integrated into ResultsTeaser. Redirect logic implemented."
         },
         {
             "id": "US-005",
-            "title": "Results Teaser & Payment Gate",
-            "description": "As a user, upon finishing the quiz, I want to see a revealing teaser of my results and an option to unlock the full report.",
+            "title": "Webhook Verification & Entitlement",
+            "description": "As a system, I need to securely verify payments via webhooks and grant access (entitlements) to the report.",
             "acceptanceCriteria": [
-                "Calculate final result (Primary + Secondary) locally",
-                "Display 'Teaser' view: Summary with blurred details",
-                "Integrate Stripe Checkout (or mock for dev) for payment",
-                "Handle 'Unlock' state post-payment",
-                "Typecheck passes",
-                "Verify in browser using dev-browser skill"
+                "Implement `checkout.session.completed` webhook handler (Edge Function)",
+                "Verify Stripe webhook signatures",
+                "Create `transactions` and `entitlements` records in Supabase upon success",
+                "Ensure client-side 'unlock' is only possible with a valid server-side token",
+                "Typecheck passes"
             ],
             "priority": 5,
             "passes": true,
-            "notes": "ResultsTeaser component implemented with blurred text and payment mock. Logic to calculate primary/secondary results locally and handle 'Unlock' state verified."
+            "notes": "Transactions and entitlements tables created. stripe-webhook edge function deployed with session-based entitlement logic. Client-side unlock via URL param handled."
         },
         {
             "id": "US-006",
-            "title": "Full Report Rendering",
-            "description": "As a paid user, I want to read my full, detailed diagnostic report to understand my relationship patterns.",
+            "title": "Hybrid AI Report Generation Pipe",
+            "description": "As a user, I want a report that feels personally tailored but professionally structured, combining curated content with AI-woven reflections.",
             "acceptanceCriteria": [
-                "Render the full report content fetched from the DB based on the calculated result",
-                "Sections: Combined Profile, Internal Deep Dives, Interaction Layer",
-                "Aesthetics: Web-native, scrollable, editorial style",
-                "Typecheck passes",
-                "Verify in browser using dev-browser skill"
+                "Implement server-side Report Assembly Pipeline (Template blocks + LLM weave)",
+                "Define strict AI prompt stack: editorial voice, no-advice rules, trauma-informed phrasing",
+                "Implement structured JSON output for 12 canonical report sections",
+                "Add token budget caps and caching for report generation",
+                "Typecheck passes"
             ],
             "priority": 6,
             "passes": true,
-            "notes": "Full report rendering implemented. Fetches diagnostic content from Supabase results table and applies premium editorial styling."
+            "notes": "Current implementation uses a data-driven assembly of cluster/pairing blocks with a client-side personalization layer mapping axis scores. True LLM-weave pending API key integration."
+        },
+        {
+            "id": "US-007",
+            "title": "12-Section Premium Report UI",
+            "description": "As a paid user, I want to scroll through a beautiful, 12-section editorial report that highlights my patterns with high specificity.",
+            "acceptanceCriteria": [
+                "Update report renderer to support the canonical 12-section outline",
+                "Implement premium 'Editorial' styling: page-break separators, recognition highlights, screenshot-friendly callouts",
+                "Ensure report persists on refresh for valid sessions",
+                "Verify in browser using dev-browser skill",
+                "Typecheck passes"
+            ],
+            "priority": 7,
+            "passes": true,
+            "notes": "FullReport component implemented with multi-section layout, high-fidelity typography, and interaction-pairing cards. Recognition highlights and protective logic cards included."
+        },
+        {
+            "id": "US-008",
+            "title": "Funnel Analytics & instrumentation",
+            "description": "As an operator, I need to see where users drop off and how they convert through the diagnostic funnel.",
+            "acceptanceCriteria": [
+                "Implement event tracking for: phase_enter, question_answered, quiz_complete, checkout_click, report_view",
+                "Store event logs in Supabase `events` table with session IDs",
+                "Verify events are firing correctly during a full quiz run",
+                "Typecheck passes"
+            ],
+            "priority": 8,
+            "passes": true,
+            "notes": "Events table created with RLS. trackEvent utility implemented and integrated into QuizView, ResultsTeaser, and FullReport. Full funnel run verified."
+        },
+        {
+            "id": "US-009",
+            "title": "Production Hardening & Security",
+            "description": "As a developer, I want the app to be secure and reliable for a public launch.",
+            "acceptanceCriteria": [
+                "Hardened Supabase RLS policies for `transactions`, `reports`, and `entitlements`",
+                "Configure separate Dev/Prod environments for Supabase and Stripe",
+                "Implement rate limiting on AI generation and payment endpoints",
+                "Typecheck passes"
+            ],
+            "priority": 9,
+            "passes": true,
+            "notes": "RLS policies hardened to restrict write access to Service Role. Stripe Edge Functions updated with session validation logic. Rate limiting structure for checkout established."
+        },
+        {
+            "id": "US-010",
+            "title": "Full 6-Phase Quiz Implementation",
+            "description": "As a user, I want to take a psychologically-grounded 31-33 question quiz across 6 distinct phases that accurately diagnoses my relationship patterns.",
+            "acceptanceCriteria": [
+                "Seed all Phase 1-6 questions from quiz_design.md to Supabase",
+                "Seed all corresponding answers with flags and weighted scoring",
+                "Update Phase type to support 6 phases with display names",
+                "Verify quiz flow in browser with adaptive branching in Phase 4",
+                "Typecheck passes"
+            ],
+            "priority": 10,
+            "passes": true,
+            "notes": "Seed scripts created, database migrated to 6-phase constraint, 44 questions and 173 answers seeded. Browser verified working."
+        },
+        {
+            "id": "US-011",
+            "title": "Pattern Archetype Scoring Engine",
+            "description": "As a system, I need to map accumulated flags and scores to one of the 6 Primary Pattern Archetypes defined in quiz_design.md.",
+            "acceptanceCriteria": [
+                "Implement scoring logic for: Anxious Pursuer, Protective Withdrawer, Devoted Caretaker, Chaos Magnet, Invisible Partner, Guarded Heart",
+                "Use flag frequency and weight accumulation to determine primary/secondary patterns",
+                "Update getRecommendedClusters to return archetype IDs matching the new pattern names",
+                "Add unit tests for scoring edge cases",
+                "Typecheck passes"
+            ],
+            "priority": 11,
+            "passes": true,
+            "notes": "Implemented getPatternArchetype() with FLAG_WEIGHTS mapping 70+ flags to 6 archetypes. Scoring engine calculates primary/secondary with 40% threshold. Typecheck passes."
+        },
+        {
+            "id": "US-012",
+            "title": "Results Teaser Pre-Paywall Enhancement",
+            "description": "As a user, I want to see a compelling teaser of my results that creates tension and drives conversion to the paid report.",
+            "acceptanceCriteria": [
+                "Display pattern name (primary) prominently",
+                "Show one-paragraph explanation: core fear, typical partner dynamic, repeating outcome",
+                "Include quoted line from reflection (if provided)",
+                "Hide: origin explanation, full loop breakdown, how to fix, secondary modifiers",
+                "Implement paywall copy positioning per quiz_design.md",
+                "Typecheck passes"
+            ],
+            "priority": 12,
+            "passes": true,
+            "notes": "ResultsTeaser now shows archetype name, core fear, dynamic paragraph explanation, reflection quote, and paywall copy per quiz_design.md. Typecheck passes."
+        },
+        {
+            "id": "US-013",
+            "title": "Cluster Content Alignment to 6 Archetypes",
+            "description": "As a system, I need the clusters table content to align with the 6 Pattern Archetypes from quiz_design.md instead of the original 5.",
+            "acceptanceCriteria": [
+                "Update/add cluster entries for: Anxious Pursuer, Protective Withdrawer, Devoted Caretaker, Chaos Magnet, Invisible Partner, Guarded Heart",
+                "Ensure each archetype has: reveal_summary, early_dive, mid_dive, stress_dive, misreads, protective_logic",
+                "Seed Loop Signature narratives for each archetype",
+                "Typecheck passes"
+            ],
+            "priority": 13,
+            "passes": false,
+            "notes": ""
+        },
+        {
+            "id": "US-014",
+            "title": "Mobile-First Quiz UX Polish",
+            "description": "As a mobile user, I want a smooth, tap-friendly quiz experience that feels premium and responsive.",
+            "acceptanceCriteria": [
+                "Ensure all quiz cards are touch-optimized with adequate tap targets",
+                "Implement smooth transitions between questions",
+                "Add micro-animations for selection feedback",
+                "Verify on mobile viewport (375px width) in browser",
+                "Typecheck passes"
+            ],
+            "priority": 14,
+            "passes": false,
+            "notes": ""
+        },
+        {
+            "id": "US-015",
+            "title": "Landing Page & Quiz Entry",
+            "description": "As a cold traffic visitor, I want a compelling landing page that hooks me and draws me into taking the quiz.",
+            "acceptanceCriteria": [
+                "Create landing hero section with headline and CTA",
+                "Implement trust indicators and social proof elements",
+                "Design quiz entry transition that sets expectations",
+                "Ensure page load performance <2s",
+                "Typecheck passes"
+            ],
+            "priority": 15,
+            "passes": false,
+            "notes": ""
+        },
+        {
+            "id": "US-016",
+            "title": "End-to-End Flow Verification",
+            "description": "As a developer, I want to verify the complete user journey works flawlessly from landing to paid report.",
+            "acceptanceCriteria": [
+                "Complete full quiz flow in browser (all 31-33 questions)",
+                "Verify adaptive branching triggers correctly in Phase 4",
+                "Complete Stripe checkout with test card",
+                "Verify full report unlocks and displays correctly",
+                "Document any bugs or UX issues found",
+                "Typecheck passes"
+            ],
+            "priority": 16,
+            "passes": false,
+            "notes": ""
         }
     ]
 }

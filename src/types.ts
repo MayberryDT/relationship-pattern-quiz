@@ -1,4 +1,14 @@
-export type Phase = 'early' | 'mid' | 'late';
+export type Phase = 'phase1' | 'phase2' | 'phase3' | 'phase4' | 'phase5' | 'phase6';
+
+// Phase display names for UI
+export const PHASE_NAMES: Record<Phase, string> = {
+    phase1: 'Pattern Recognition',
+    phase2: 'Core Vulnerability',
+    phase3: 'Response Under Threat',
+    phase4: 'Deep Dive',
+    phase5: 'Contradiction Surface',
+    phase6: 'Reflection'
+};
 export type QuestionType = 'mc' | 'text';
 
 export interface Question {
@@ -7,6 +17,8 @@ export interface Question {
     type: QuestionType;
     phase: Phase;
     order_index: number;
+    gating_logic: Record<string, any>;
+    confidence_modifier: number;
 }
 
 export interface Answer {
@@ -16,14 +28,32 @@ export interface Answer {
     weight_pattern: number;
     weight_driver: number;
     weight_reinforcement: number;
+    flag_set: string[];
 }
 
 export interface Cluster {
-    id: string; // Internal UUID
-    cluster_id: string; // C1, C2, C3, C4, C5
-    title: string;
-    content_markdown: string;
-    type: 'primary' | 'secondary';
+    id: string; // 'C1', 'C2', etc.
+    name_internal: string;
+    name_display: string;
+    reveal_summary: string;
+    early_dive: string;
+    mid_dive: string;
+    stress_dive: string;
+    misreads: string;
+    protective_logic: string;
+    phrasing_inside: string;
+    phrasing_outside: string;
+}
+
+export interface Pairing {
+    id: string;
+    primary_cluster_id: string;
+    secondary_cluster_id: string;
+    interaction_narrative: string;
+    timeline_sequence: string;
+    recognition_highlights: string[];
+    is_allowed: boolean;
+    disallowed_rationale?: string;
 }
 
 export interface QuizState {
@@ -32,10 +62,12 @@ export interface QuizState {
         driver: number;
         reinforcement: number;
     };
+    flags: string[]; // Track custom flags set by answers
     answers: Record<string, string>; // questionId -> answerId
     reflections: Record<string, string>; // questionId -> text
     currentQuestionIndex: number;
     isUnlocked: boolean;
+    quizSessionId: string;
 
     // Actions
     addAnswer: (questionId: string, answer: Answer) => void;
@@ -44,4 +76,5 @@ export interface QuizState {
     prevQuestion: () => void;
     resetQuiz: () => void;
     setUnlock: (status: boolean) => void;
+    setSessionId: (id: string) => void;
 }

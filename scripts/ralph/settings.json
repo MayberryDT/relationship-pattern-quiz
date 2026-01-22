@@ -1,0 +1,25 @@
+{
+    "sandbox": {
+        "allowedCommands": [
+            "npm",
+            "git",
+            "ls",
+            "cat",
+            "grep",
+            "find",
+            "mkdir",
+            "mv",
+            "cp",
+            "rm",
+            "node",
+            "npx"
+        ],
+        "disallowedPaths": [
+            ".git",
+            "node_modules",
+            ".env"
+        ],
+        "maxDurationMs": 300000,
+        "networkAccess": true
+    }
+}
