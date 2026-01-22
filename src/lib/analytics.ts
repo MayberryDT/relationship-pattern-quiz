@@ -1,6 +1,7 @@
 import { supabase } from './supabase';
 
 export type EventType =
+    | 'quiz_start'
     | 'phase_enter'
     | 'question_answered'
     | 'quiz_complete'

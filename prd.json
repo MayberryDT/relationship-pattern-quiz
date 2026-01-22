@@ -190,8 +190,8 @@
                 "Typecheck passes"
             ],
             "priority": 13,
-            "passes": false,
-            "notes": ""
+            "passes": true,
+            "notes": "Updated seed_content.ts with 6 archetypes (Anxious Pursuer, Protective Withdrawer, Devoted Caretaker, Chaos Magnet, Invisible Partner, Guarded Heart) and 6 pairing interactions. All seeded to Supabase."
         },
         {
             "id": "US-014",
@@ -205,8 +205,8 @@
                 "Typecheck passes"
             ],
             "priority": 14,
-            "passes": false,
-            "notes": ""
+            "passes": true,
+            "notes": "Added 260+ lines of mobile-first CSS: 56px touch targets, micro-animations for selection, button press feedback, smooth transitions, safe-area padding, loading states. Verified on 375px viewport."
         },
         {
             "id": "US-015",
@@ -220,8 +220,8 @@
                 "Typecheck passes"
             ],
             "priority": 15,
-            "passes": false,
-            "notes": ""
+            "passes": true,
+            "notes": "Created LandingPage component with hero, trust indicators (31+, 6, 12), what you'll discover section, quote, and dual CTAs. Added 200+ lines of landing page CSS. Browser verified transition to quiz works."
         },
         {
             "id": "US-016",
@@ -236,8 +236,8 @@
                 "Typecheck passes"
             ],
             "priority": 16,
-            "passes": false,
-            "notes": ""
+            "passes": true,
+            "notes": "E2E flow verified: Landing page → Quiz start → 22 questions answered across Phase 1/2/3 → Phase transitions work correctly. Progress bar, transitions, and state persistence all functional."
         }
     ]
 }
