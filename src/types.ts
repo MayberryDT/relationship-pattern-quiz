@@ -19,7 +19,8 @@ export interface Answer {
 }
 
 export interface Cluster {
-    id: string; // C1, C2, C3, C4, C5
+    id: string; // Internal UUID
+    cluster_id: string; // C1, C2, C3, C4, C5
     title: string;
     content_markdown: string;
     type: 'primary' | 'secondary';

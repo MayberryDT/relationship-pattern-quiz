@@ -55,3 +55,12 @@ Started: 2026-01-21
   - `ResultsTeaser` serves as the critical conversion point; typography here must be the most premium in the app.
   - Using a blurred overlay instead of just hiding content increases user curiosity and perceived value.
 ---
+
+## 2026-01-21 - US-006
+- Implemented `FullReport` component with multi-section editorial layout.
+- Integrated Supabase fetching for Cluster-specific report content.
+- Added adaptive "Growth Integration" logic based on Primary/Secondary pairings.
+- **Learnings for future iterations:**
+  - Semantic HTML (`section`, `footer`) helps organize the long-form report for better scannability.
+  - The "Editorial Serenity" theme truly shines in the report view, where typography does the heavy lifting.
+---

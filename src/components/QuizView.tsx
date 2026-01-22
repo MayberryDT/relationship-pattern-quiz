@@ -4,6 +4,7 @@ import { useQuizStore } from '../store/useQuizStore';
 import ProgressBar from './ProgressBar';
 import QuestionCard from './QuestionCard';
 import ResultsTeaser from './ResultsTeaser';
+import FullReport from './FullReport';
 import type { Question, Answer } from '../types';
 
 const QuizView: React.FC = () => {
@@ -77,12 +78,7 @@ const QuizView: React.FC = () => {
         if (!isUnlocked) {
             return <ResultsTeaser />;
         }
-        return (
-            <div className="container text-center">
-                <h1 className="serif question-text">Diagnostic Unlocked</h1>
-                <p className="question-subtext text-secondary">Loading your full report...</p>
-            </div>
-        );
+        return <FullReport />;
     }
 
     const currentQuestion = questions[currentQuestionIndex];
