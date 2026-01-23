@@ -204,7 +204,7 @@ The loop feels right, even when you can see it is harmful. The vigilance feels n
                         }
                 },
 
-                why_advice_fails: 'Advice to "just relax" or "give them space" does not address the underlying nervous system activation. Your body interprets distance as danger before your mind can intervene. The problem is not insufficient willpower—it is that your threat detection system is calibrated to an earlier time when vigilance was necessary for survival.'
+                why_advice_fails: 'Advice to "just relax" or "give them space" does not address the underlying nervous system activation. Your body interprets distance as danger before your mind can intervene. The problem is not insufficient willpower: it is that your threat detection system is calibrated to an earlier time when vigilance was necessary for survival.'
         },
 
         'The Protective Withdrawer': {
@@ -332,7 +332,7 @@ The loop feels right, even when you can see it is harmful. The distance feels ne
                         }
                 },
 
-                why_advice_fails: 'Advice to "just open up" or "be more vulnerable" does not address the underlying nervous system response. Your body interprets closeness as threat before your mind can intervene. The problem is not insufficient effort—it is that your protection system was calibrated by experiences where intimacy came with a cost.'
+                why_advice_fails: 'Advice to "just open up" or "be more vulnerable" does not address the underlying nervous system response. Your body interprets closeness as threat before your mind can intervene. The problem is not insufficient effort: it is that your protection system was calibrated by experiences where intimacy came with a cost.'
         },
 
         'The Devoted Caretaker': {
@@ -458,7 +458,7 @@ The loop feels right, even when it is harming you. The giving feels like love. T
                         }
                 },
 
-                why_advice_fails: 'Advice to "just ask for what you need" does not address the underlying belief that your needs are burdensome. Your system learned that receiving is dangerous, that having needs makes you vulnerable. The problem is not insufficient communication—it is that asking feels like risking rejection.'
+                why_advice_fails: 'Advice to "just ask for what you need" does not address the underlying belief that your needs are burdensome. Your system learned that receiving is dangerous, that having needs makes you vulnerable. The problem is not insufficient communication: it is that asking feels like risking rejection.'
         },
 
         'The Chaos Magnet': {
@@ -584,7 +584,7 @@ The loop feels right, even when it is destroying your relationships. The intensi
                         }
                 },
 
-                why_advice_fails: 'Advice to "calm down" or "stop creating drama" does not address the underlying nervous system wiring. Your body equates stability with danger because it was calibrated by chaos. The problem is not insufficient self-control—it is that your system genuinely does not recognize calm as safe.'
+                why_advice_fails: 'Advice to "calm down" or "stop creating drama" does not address the underlying nervous system wiring. Your body equates stability with danger because it was calibrated by chaos. The problem is not insufficient self-control: it is that your system genuinely does not recognize calm as safe.'
         },
 
         'The Invisible Partner': {
@@ -710,7 +710,7 @@ The loop feels right, even when it is leaving you starved. The shrinking feels s
                         }
                 },
 
-                why_advice_fails: 'Advice to "just speak up" does not address the underlying belief that your needs are illegitimate. Your system suppresses needs before they even reach awareness. The problem is not insufficient courage—it is that you genuinely do not know what you need because the suppression is that deep.'
+                why_advice_fails: 'Advice to "just speak up" does not address the underlying belief that your needs are illegitimate. Your system suppresses needs before they even reach awareness. The problem is not insufficient courage: it is that you genuinely do not know what you need because the suppression is that deep.'
         },
 
         'The Guarded Heart': {
@@ -836,7 +836,7 @@ The loop feels right, even when it is isolating you. The walls feel protective. 
                         }
                 },
 
-                why_advice_fails: 'Advice to "just trust" does not address the underlying reality that for you, trust was dangerous. Your vigilance is not paranoia—it is learned protection. The problem is not insufficient faith—it is that your system was calibrated by experiences where trust led to harm.'
+                why_advice_fails: 'Advice to "just trust" does not address the underlying reality that for you, trust was dangerous. Your vigilance is not paranoia: it is learned protection. The problem is not insufficient faith: it is that your system was calibrated by experiences where trust led to harm.'
         }
 };
 

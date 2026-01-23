@@ -20,9 +20,9 @@ import { trackEvent } from '../lib/analytics';
 const PATTERN_SPECIFIC_BULLETS: Record<string, { reveals: string[]; gap: string[] }> = {
     ANXIOUS_PURSUER: {
         reveals: [
-            "Why you're drawn to partners who feel slightly out of reach — and why that chemistry feels urgent",
+            "Why you're drawn to partners who feel slightly out of reach: and why that chemistry feels urgent",
             "The exact moment the loop locks in: when reassurance stops working and pursuit intensifies",
-            "Why wanting to be chosen leads you to push harder — and how that pressure creates distance",
+            "Why wanting to be chosen leads you to push harder: and how that pressure creates distance",
             "The blind spot that keeps you analyzing the relationship instead of experiencing it",
         ],
         gap: [
@@ -34,9 +34,9 @@ const PATTERN_SPECIFIC_BULLETS: Record<string, { reveals: string[]; gap: string[
     },
     PROTECTIVE_WITHDRAWER: {
         reveals: [
-            "Why closeness feels like a threat to your autonomy — not because you don't want it",
+            "Why closeness feels like a threat to your autonomy: not because you don't want it",
             "The exact moment withdrawal becomes automatic: when connection starts to feel like obligation",
-            "Why partners experience your need for space as rejection — even when it isn't",
+            "Why partners experience your need for space as rejection: even when it isn't",
             "The blind spot that makes you choose distance over discomfort, every time",
         ],
         gap: [
@@ -48,9 +48,9 @@ const PATTERN_SPECIFIC_BULLETS: Record<string, { reveals: string[]; gap: string[
     },
     DEVOTED_CARETAKER: {
         reveals: [
-            "Why giving feels safer than receiving — and what you're protecting by staying useful",
+            "Why giving feels safer than receiving: and what you're protecting by staying useful",
             "The exact moment resentment builds: when care isn't reciprocated and you can't say so",
-            "Why you attract partners who take more than they give — and why you stay",
+            "Why you attract partners who take more than they give: and why you stay",
             "The blind spot that keeps you invisible in your own relationships",
         ],
         gap: [
@@ -62,9 +62,9 @@ const PATTERN_SPECIFIC_BULLETS: Record<string, { reveals: string[]; gap: string[
     },
     CHAOS_MAGNET: {
         reveals: [
-            "Why stability feels suspicious — and why intensity feels like proof of connection",
+            "Why stability feels suspicious: and why intensity feels like proof of connection",
             "The exact moment boredom becomes unbearable: when you create conflict to feel alive",
-            "Why calm partners feel 'off' — and why volatile ones feel like home",
+            "Why calm partners feel 'off': and why volatile ones feel like home",
             "The blind spot that mistakes drama for passion, every time",
         ],
         gap: [
@@ -76,9 +76,9 @@ const PATTERN_SPECIFIC_BULLETS: Record<string, { reveals: string[]; gap: string[
     },
     INVISIBLE_PARTNER: {
         reveals: [
-            "Why you've learned that asking for too much drives people away — so you ask for nothing",
+            "Why you've learned that asking for too much drives people away: so you ask for nothing",
             "The exact moment you disappear: when your needs get small to avoid being 'too much'",
-            "Why partners don't see what you need — because you've become expert at hiding it",
+            "Why partners don't see what you need: because you've become expert at hiding it",
             "The blind spot that keeps you lonely inside your own relationships",
         ],
         gap: [
@@ -90,9 +90,9 @@ const PATTERN_SPECIFIC_BULLETS: Record<string, { reveals: string[]; gap: string[
     },
     GUARDED_HEART: {
         reveals: [
-            "Why hypervigilance feels like protection — even when it creates what you fear",
+            "Why hypervigilance feels like protection: even when it creates what you fear",
             "The exact moment trust becomes a test: when you're watching for betrayal before it arrives",
-            "Why partners feel they can never prove themselves — because the test never ends",
+            "Why partners feel they can never prove themselves: because the test never ends",
             "The blind spot that sees danger in safety and confirms suspicion as wisdom",
         ],
         gap: [
@@ -251,7 +251,7 @@ const FreeReport: React.FC = () => {
                 </div>
             )}
 
-            {/* TRANSITION: What This Explains — and What It Doesn't */}
+            {/* TRANSITION: What This Explains: and What It Doesn't */}
             <div style={{
                 maxWidth: '700px',
                 margin: '0 auto 3rem',
@@ -359,7 +359,7 @@ const FreeReport: React.FC = () => {
                     lineHeight: '1.7',
                     color: 'var(--text-secondary)'
                 }}>
-                    You've seen the outline. The full explanation — why this formed, why it repeats, why knowing hasn't been enough — is one click away.
+                    You've seen the outline. The full explanation: why this formed, why it repeats, why knowing hasn't been enough: is one click away.
                 </p>
 
                 <button

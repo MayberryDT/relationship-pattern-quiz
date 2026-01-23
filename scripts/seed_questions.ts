@@ -72,7 +72,7 @@ const answers = [
     // Q1 Answers
     {
         question_id: 'q1',
-        text: 'Relief—I can finally relax and be myself.',
+        text: 'Relief: I can finally relax and be myself.',
         weight_pattern: 0.5,
         weight_driver: 0.2,
         weight_reinforcement: 0.8,
@@ -80,7 +80,7 @@ const answers = [
     },
     {
         question_id: 'q1',
-        text: 'Anxiety—I wonder when the "other shoe" will drop.',
+        text: 'Anxiety: I wonder when the "other shoe" will drop.',
         weight_pattern: 1.2,
         weight_driver: 0.5,
         weight_reinforcement: 0.1,
@@ -88,7 +88,7 @@ const answers = [
     },
     {
         question_id: 'q1',
-        text: 'Boredom—I miss the intensity of the early chase.',
+        text: 'Boredom: I miss the intensity of the early chase.',
         weight_pattern: 0.3,
         weight_driver: 1.5,
         weight_reinforcement: 0.5,
@@ -96,7 +96,7 @@ const answers = [
     },
     {
         question_id: 'q1',
-        text: 'Watchfulness—I look for signs of the dynamic changing.',
+        text: 'Watchfulness: I look for signs of the dynamic changing.',
         weight_pattern: 0.8,
         weight_driver: 0.8,
         weight_reinforcement: 1.2,

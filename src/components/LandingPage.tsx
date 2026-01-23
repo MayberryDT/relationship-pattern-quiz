@@ -33,12 +33,12 @@ const LandingPage: React.FC<LandingPageProps> = ({ onStartQuiz }) => {
 
                     <p className="hero-subtext">
                         You've been here before. The same loop, different face. There's a pattern
-                        running beneath the surface—a blueprint you can't see but can't escape.
+                        running beneath the surface: a blueprint you can't see but can't escape.
                     </p>
 
                     <p className="hero-hook">
                         This diagnostic reveals the <span className="text-gold">exact mechanism</span>:
-                        your core fear, the loop signature, the moment it locks in.
+                        your core fear, the loop signature, and the moment it locks in.
                     </p>
                     <p className="hero-personalization">
                         Generated from your answers. Written in full prose. No templates.
@@ -85,11 +85,11 @@ const LandingPage: React.FC<LandingPageProps> = ({ onStartQuiz }) => {
                 <div className="reveals-grid">
                     {[
                         { num: '01', title: 'Your Core Pattern', desc: 'Why relationships follow the same emotional arc.' },
-                        { num: '02', title: 'The Four-Phase Loop', desc: 'Where things start to go wrong—and why it feels sudden.' },
+                        { num: '02', title: 'The Four-Phase Loop', desc: 'Where things start to go wrong and why it feels sudden.' },
                         { num: '03', title: 'Why It Keeps Repeating', desc: 'Why different partners don’t change the ending.' },
-                        { num: '04', title: 'The Internal Contradiction', desc: 'Why wanting closeness creates distance.' },
-                        { num: '05', title: 'Shadow Mechanisms', desc: 'The protection you don’t realize you’re using.' },
-                        { num: '06', title: 'Deep Personalization', desc: '2,000–4,000 words written from your answers.' },
+                        { num: '04', title: 'The Internal Contradiction', desc: 'Why wanting closeness often creates distance.' },
+                        { num: '05', title: 'Shadow Mechanisms', desc: 'The protection strategies you don’t realize you’re using.' },
+                        { num: '06', title: 'Deep Personalization', desc: '2,000 to 4,000 words written from your actual answers.' },
                     ].map((item) => (
                         <div key={item.num} className="reveal-card">
                             <span className="reveal-num">{item.num}</span>
@@ -117,7 +117,7 @@ const LandingPage: React.FC<LandingPageProps> = ({ onStartQuiz }) => {
                         <div className="card-accent" />
                         <h3 className="card-title">Schema Logic</h3>
                         <p className="card-text">
-                            Identifying the "tinted glasses" of childhood-formed beliefs
+                            Identify the "tinted glasses" of childhood beliefs
                             that filter every relationship you enter.
                         </p>
                     </div>
@@ -125,7 +125,7 @@ const LandingPage: React.FC<LandingPageProps> = ({ onStartQuiz }) => {
                         <div className="card-accent" />
                         <h3 className="card-title">CCRT Mapping</h3>
                         <p className="card-text">
-                            Surface your Core Conflictual Relationship Themes—the hidden
+                            Surface your Core Conflictual Relationship Themes: the hidden
                             scripts running beneath your connections.
                         </p>
                     </div>
@@ -133,7 +133,7 @@ const LandingPage: React.FC<LandingPageProps> = ({ onStartQuiz }) => {
                         <div className="card-accent" />
                         <h3 className="card-title">Attachment Theory</h3>
                         <p className="card-text">
-                            Decode your survival strategies: pursue, withdraw,
+                            Decode your survival strategies: the impulse to pursue, withdraw,
                             or give until empty.
                         </p>
                     </div>
@@ -162,7 +162,7 @@ const LandingPage: React.FC<LandingPageProps> = ({ onStartQuiz }) => {
                 </div>
 
                 <p className="stats-interpretation">
-                    Enough depth to explain—not just describe—your pattern.
+                    Enough depth to explain your pattern, not just describe it.
                 </p>
 
                 <blockquote className="featured-quote">
@@ -189,10 +189,10 @@ const LandingPage: React.FC<LandingPageProps> = ({ onStartQuiz }) => {
                         <div className="diff-content">
                             <h3>It doesn't tell you what to do.</h3>
                             <p>
-                                It tells you what’s actually happening—before the loop runs.
+                                It tells you what’s actually happening before the loop runs.
                             </p>
                             <p>
-                                Most advice focuses on fixing behavior. This focuses on catching the mechanism—in
+                                Most advice focuses on fixing behavior. This focuses on catching the mechanism in
                                 the first 10% of the loop, before it runs.
                             </p>
                         </div>
@@ -229,8 +229,8 @@ const LandingPage: React.FC<LandingPageProps> = ({ onStartQuiz }) => {
                 <div className="cta-container">
                     <h2 className="cta-headline">Ready to see the pattern?</h2>
                     <p className="cta-subtext">
-                        You've answered these questions before—in your head, in your journal,
-                        in the 3am spiral. But you've never seen them assembled into this.
+                        You've answered these questions before: in your head, in your journal,
+                        or in a 3am spiral. But you've never seen them assembled into this.
                     </p>
 
                     <button className="btn-premium btn-large" onClick={onStartQuiz}>

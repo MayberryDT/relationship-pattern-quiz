@@ -106,15 +106,6 @@ const PaidReport: React.FC = () => {
 
     return (
         <div className="container paid-report animate-in">
-            <div className="report-header print-header">
-                <div className="mono text-secondary mb-2">RELATIONSHIP PATTERN DIAGNOSTIC</div>
-                <div className="mono text-secondary mb-4" style={{ fontSize: '0.75rem' }}>
-                    4,000+ Word Report
-                    {isEnhancing && <span className="ml-2 text-indigo-600 animate-pulse">• Generating deep-dive analysis (approx 20s)...</span>}
-                </div>
-            </div>
-
-
             <div className="report-content paid-report-content">
                 <ReactMarkdown
                     remarkPlugins={[remarkGfm]}
@@ -189,7 +180,7 @@ const PaidReport: React.FC = () => {
                     </button>
                 </div>
             </footer>
-        </div>
+        </div >
     );
 };
 

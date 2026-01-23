@@ -124,7 +124,7 @@ export const useQuizStore = create<QuizState>()(
                     'contradiction': 'want_chosen_but_push_away'
                 },
                 reflections: {
-                    'reflection_main': 'I know I can be too much. I feel it happening—the texts, the checking, the need for reassurance—and I can\'t stop. It\'s like watching myself drive someone away in slow motion.',
+                    'reflection_main': 'I know I can be too much. I feel it happening: the texts, the checking, the need for reassurance; and I can\'t stop. It\'s like watching myself drive someone away in slow motion.',
                     'reflection_origin': 'My father left when I was seven. No warning, no explanation. I think part of me is still that kid, waiting for everyone to leave.'
                 },
                 scores: { pattern: 18, driver: 14, reinforcement: 10 },

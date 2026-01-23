@@ -196,10 +196,8 @@ function generatePaidReport(
 ): string {
 
     const sections: string[] = [];
-    const name = inputs.user_first_name || 'you';
-
     // 1. Executive Summary (bullet format)
-    sections.push(generateExecutiveSummary(inputs, archetype, patternData, consistency, name, aiInsights));
+    sections.push(generateExecutiveSummary(inputs, archetype, patternData, consistency, aiInsights));
 
     // 2. Diagnostic Snapshot (NEW - boxed metrics)
     sections.push(generateDiagnosticSnapshot(archetype, patternData));
@@ -318,7 +316,7 @@ ${archetype.core_vulnerability_deep}
 
 ${archetype.protective_logic}
 
-The fear at the center of this pattern—the fear ${fearDesc}—is not irrational. It is a reasonable conclusion drawn from unreasonable circumstances. Your system learned to protect you in the only way it knew how. The challenge now is that the protection has outlived the original threat.`;
+The fear at the center of this pattern, the fear ${fearDesc}, is not irrational. It is a reasonable conclusion drawn from unreasonable circumstances. Your system learned to protect you in the only way it knew how. The challenge now is that the protection has outlived the original threat.`;
 }
 
 function generateExecutiveSummary(
@@ -326,7 +324,6 @@ function generateExecutiveSummary(
     archetype: typeof ARCHETYPE_TEMPLATES[keyof typeof ARCHETYPE_TEMPLATES],
     patternData: DerivedPatternData,
     consistency: { isConsistent: boolean; note: string },
-    name: string,
     aiInsights?: any
 ): string {
 
@@ -352,8 +349,6 @@ function generateExecutiveSummary(
         : `${archetype.executive_summary}${modifierText}${contradictionText}`;
 
     return `# Your Relationship Pattern Diagnostic Report
-
-Hi ${name === 'you' ? 'there' : name},
 
 ## Executive Summary
 

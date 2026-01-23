@@ -104,7 +104,7 @@ JSON Structure:
   
   "subconscious_commitments": "A 400-word analysis of what they are subconsciously committed to maintaining (e.g. 'You are committed to being misunderstood because it confirms your safety strategy'). Use the 'Hidden Drivers' concept.",
   
-  "shadow_mechanism": "A 400-word explanation of the darkest part of their loop—the part they most want to look away from. Be gentle but surgical. Mirror their reflection back to them.",
+  "shadow_mechanism": "A 400-word explanation of the darkest part of their loop: the part they most want to look away from. Be gentle but surgical. Mirror their reflection back to them.",
   
   "future_self_letter": "A 500-word narrative letter from their 'healed future self' to their current self, acknowledging the pain of the current pattern and offering a vision of the specific freedom that comes from breaking this specific loop."
 }
