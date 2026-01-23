@@ -1,6 +1,7 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 import type { QuizState, Answer } from '../types';
+import { generateUUID } from '../lib/id';
 
 export const useQuizStore = create<QuizState>()(
     persist(
@@ -15,8 +16,9 @@ export const useQuizStore = create<QuizState>()(
             reflections: {},
             currentQuestionIndex: 0,
             isUnlocked: false,
-            quizSessionId: crypto.randomUUID(),
+            quizSessionId: generateUUID(),
             showQuiz: false,
+            showTeaser: false,
 
 
             addAnswer: (questionId: string, answer: Answer) => set((state) => {
@@ -64,12 +66,14 @@ export const useQuizStore = create<QuizState>()(
                 reflections: {},
                 currentQuestionIndex: 0,
                 isUnlocked: false,
-                quizSessionId: crypto.randomUUID(),
+                quizSessionId: generateUUID(),
                 showQuiz: false,
+                showTeaser: false,
             }),
 
             setUnlock: (status) => set({ isUnlocked: status }),
             setSessionId: (id) => set({ quizSessionId: id }),
+            setShowTeaser: (show) => set({ showTeaser: show }),
 
             // Dev methods with comprehensive mock data for testing
             devSkipToPaywall: () => set({
@@ -141,6 +145,7 @@ export const useQuizStore = create<QuizState>()(
                 isUnlocked: state.isUnlocked,
                 quizSessionId: state.quizSessionId,
                 showQuiz: state.showQuiz,
+                showTeaser: state.showTeaser,
             }),
         }
     )

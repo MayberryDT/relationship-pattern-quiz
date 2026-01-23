@@ -69,6 +69,8 @@ export interface QuizState {
     isUnlocked: boolean;
     quizSessionId: string;
     showQuiz: boolean;
+    showTeaser: boolean;
+    setShowTeaser: (show: boolean) => void;
     name?: string; // User's first name for personalization
     primaryArchetype?: string; // Calculated primary pattern archetype
 

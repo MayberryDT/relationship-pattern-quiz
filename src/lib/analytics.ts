@@ -7,6 +7,7 @@ export type EventType =
     | 'quiz_complete'
     | 'checkout_click'
     | 'report_view'
+    | 'free_report_continue'
     | 'paid_report_view'
     | 'report_download';
 

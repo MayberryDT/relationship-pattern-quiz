@@ -11,6 +11,7 @@
 import React from 'react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
+import { Lock } from 'lucide-react';
 import { useReportGenerator } from '../lib/reportGenerator/useReportGenerator';
 import { useQuizStore, getPatternArchetype } from '../store/useQuizStore';
 import { supabase } from '../lib/supabase';
@@ -106,7 +107,7 @@ const PATTERN_SPECIFIC_BULLETS: Record<string, { reveals: string[]; gap: string[
 
 const FreeReport: React.FC = () => {
     const { reports, archetypeName, modifiers } = useReportGenerator();
-    const { quizSessionId, flags, reflections, primaryArchetype } = useQuizStore();
+    const { quizSessionId, flags, reflections, primaryArchetype, setShowTeaser } = useQuizStore();
 
     // Get archetype for core fear and pattern-specific copy
     const archetype = flags.length > 0 ? getPatternArchetype(flags) : null;
@@ -119,29 +120,12 @@ const FreeReport: React.FC = () => {
     // Get reflection quote if available
     const reflectionQuote = Object.values(reflections)[0] || null;
 
-    const handleUnlock = async () => {
-        trackEvent(quizSessionId, 'checkout_click', {
-            price: '$9',
-            product: 'Full Report',
+    const handleUnlock = () => {
+        trackEvent(quizSessionId, 'free_report_continue', {
             archetype: archetypeName
         });
-
-        try {
-            const { data, error } = await supabase.functions.invoke('create-checkout-session', {
-                body: {
-                    priceId: 'price_1SsQ1hGreyv23Im6tgUCrzw7',
-                    quizSessionId: quizSessionId
-                }
-            });
-
-            if (error) throw error;
-            if (data?.url) {
-                window.location.href = data.url;
-            }
-        } catch (err) {
-            console.error('Checkout error:', err);
-            alert('Could not initialize checkout. Please try again.');
-        }
+        setShowTeaser(true);
+        window.scrollTo(0, 0);
     };
 
     if (!reports) {
@@ -278,9 +262,11 @@ const FreeReport: React.FC = () => {
                 <h3 className="serif" style={{
                     fontSize: '1.4rem',
                     marginBottom: '1.5rem',
-                    textAlign: 'center'
+                    textAlign: 'center',
+                    letterSpacing: '0.05em',
+                    color: 'var(--accent-warm)'
                 }}>
-                    What This Report Does <em>Not</em> Explain Yet
+                    MISSING FROM YOUR PROFILE
                 </h3>
 
                 <p style={{
@@ -300,11 +286,23 @@ const FreeReport: React.FC = () => {
                     fontSize: '1rem',
                     lineHeight: '1.8',
                     maxWidth: '500px',
-                    margin: '0 auto'
+                    margin: '0 auto',
+                    opacity: 0.6
                 }}>
                     {patternBullets.gap.map((item, i) => (
-                        <li key={i} style={{ marginBottom: '0.75rem', paddingLeft: '1.5rem', position: 'relative' }}>
-                            <span style={{ position: 'absolute', left: 0, color: 'var(--text-secondary)' }}>—</span>
+                        <li key={i} style={{
+                            marginBottom: '0.75rem',
+                            paddingLeft: '2rem',
+                            position: 'relative',
+                            filter: 'grayscale(100%)'
+                        }}>
+                            <Lock size={14} style={{
+                                position: 'absolute',
+                                left: 0,
+                                top: '50%',
+                                transform: 'translateY(-50%)',
+                                opacity: 0.5
+                            }} />
                             {item}
                         </li>
                     ))}
@@ -373,7 +371,7 @@ const FreeReport: React.FC = () => {
                         fontSize: '1rem'
                     }}
                 >
-                    Unlock the Full Diagnostic — $9
+                    GET MY FULL REPORT
                 </button>
 
                 <p className="mono text-secondary" style={{

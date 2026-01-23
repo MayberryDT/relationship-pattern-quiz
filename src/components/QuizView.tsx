@@ -3,7 +3,7 @@ import { supabase } from '../lib/supabase';
 import { useQuizStore } from '../store/useQuizStore';
 import ProgressBar from './ProgressBar';
 import QuestionCard from './QuestionCard';
-import FreeReport from './FreeReport';
+import ResultsTeaser from './ResultsTeaser';
 import PaidReport from './PaidReport';
 import type { Question, Answer, Phase } from '../types';
 import { PHASE_NAMES } from '../types';
@@ -127,7 +127,7 @@ const QuizView: React.FC = () => {
 
     if (currentQuestionIndex >= questions.length && questions.length > 0) {
         if (!isUnlocked) {
-            return <FreeReport />;
+            return <ResultsTeaser />;
         }
         return <PaidReport />;
     }

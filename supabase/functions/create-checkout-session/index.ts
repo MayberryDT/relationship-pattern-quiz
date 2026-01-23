@@ -1,5 +1,5 @@
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts"
-import { Stripe } from 'https://esm.sh/stripe@12.0.0?target=deno'
+import { Stripe } from 'https://esm.sh/stripe@14.25.0?target=deno'
 
 const corsHeaders = {
     'Access-Control-Allow-Origin': '*',
@@ -14,6 +14,7 @@ serve(async (req) => {
     try {
         const stripe = new Stripe(Deno.env.get('STRIPE_SECRET_KEY') ?? '', {
             httpClient: Stripe.createFetchHttpClient(),
+            apiVersion: '2023-10-16',
         })
 
         const { priceId, quizSessionId } = await req.json()
@@ -31,6 +32,7 @@ serve(async (req) => {
                 },
             ],
             mode: 'payment',
+            allow_promotion_codes: true,
             success_url: `${req.headers.get('origin')}/?success=true`,
             cancel_url: `${req.headers.get('origin')}/?canceled=true`,
         })

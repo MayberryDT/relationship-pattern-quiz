@@ -48,9 +48,10 @@ describe('QuizStore Logic', () => {
 
         const results = getRecommendedClusters(scores);
 
-        // C3 is driver * 1.1 (3.3)
-        // C2 is pattern * 0.8 + driver * 0.4 (1.6 + 1.2 = 2.8)
-        expect(results.primary).toBe('C3');
+        // Based on useQuizStore.ts:
+        // C4 = driver * 1.3 = 3.0 * 1.3 = 3.9 (Primary)
+        // C2 = driver * 1.1 = 3.0 * 1.1 = 3.3 (Secondary)
+        expect(results.primary).toBe('C4');
         expect(results.secondary).toBe('C2');
     });
 });
