@@ -14,7 +14,6 @@ import remarkGfm from 'remark-gfm';
 import { Lock } from 'lucide-react';
 import { useReportGenerator } from '../lib/reportGenerator/useReportGenerator';
 import { useQuizStore, getPatternArchetype } from '../store/useQuizStore';
-import { supabase } from '../lib/supabase';
 import { trackEvent } from '../lib/analytics';
 
 // Pattern-specific copy for the paid preview bullets
