@@ -1,8 +1,8 @@
 import React from 'react';
-import { useQuizStore } from '../store/useQuizStore';
+import { useQuizStore, ARCHETYPES } from '../store/useQuizStore';
 
 const DevShortcuts: React.FC = () => {
-    const { devSkipToPaywall, devSkipToResults, resetQuiz } = useQuizStore();
+    const { devSkipToPaywall, devSkipToResults, devSkipToReport, resetQuiz } = useQuizStore();
 
     // Only show in development
     if (import.meta.env.PROD) return null;
@@ -21,7 +21,9 @@ const DevShortcuts: React.FC = () => {
             borderRadius: '12px',
             boxShadow: '0 4px 20px rgba(0,0,0,0.15)',
             border: '1px solid #eee',
-            backdropFilter: 'blur(5px)'
+            backdropFilter: 'blur(5px)',
+            maxHeight: '90vh',
+            overflowY: 'auto'
         }}>
             <div style={{ fontSize: '10px', fontWeight: 'bold', color: '#666', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Dev Tools</div>
             <button
@@ -54,6 +56,58 @@ const DevShortcuts: React.FC = () => {
             >
                 Skip to Paid Report
             </button>
+
+            <div style={{ height: '1px', backgroundColor: '#eee', margin: '5px 0' }} />
+
+            <div style={{ fontSize: '10px', fontWeight: 'bold', color: '#666', textTransform: 'uppercase', letterSpacing: '0.05em' }}>View Report As:</div>
+
+            {Object.values(ARCHETYPES).map(archetype => (
+                <div key={archetype.id} style={{ marginBottom: '8px' }}>
+                    <div style={{ fontSize: '11px', fontWeight: 'bold', color: '#475569', marginBottom: '4px' }}>
+                        {archetype.name}
+                    </div>
+                    <div style={{ display: 'flex', gap: '5px' }}>
+                        <button
+                            onClick={() => devSkipToReport(archetype.id, 'free')}
+                            style={{
+                                flex: 1,
+                                padding: '4px 8px',
+                                backgroundColor: '#e2e8f0',
+                                color: '#475569',
+                                border: 'none',
+                                borderRadius: '4px',
+                                cursor: 'pointer',
+                                fontSize: '10px',
+                                fontWeight: '500'
+                            }}
+                            onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = '#cbd5e1'; }}
+                            onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = '#e2e8f0'; }}
+                        >
+                            Free
+                        </button>
+                        <button
+                            onClick={() => devSkipToReport(archetype.id, 'paid')}
+                            style={{
+                                flex: 1,
+                                padding: '4px 8px',
+                                backgroundColor: '#cbd5e1',
+                                color: '#1e293b',
+                                border: 'none',
+                                borderRadius: '4px',
+                                cursor: 'pointer',
+                                fontSize: '10px',
+                                fontWeight: 'bold'
+                            }}
+                            onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = '#94a3b8'; e.currentTarget.style.color = 'white'; }}
+                            onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = '#cbd5e1'; e.currentTarget.style.color = '#1e293b'; }}
+                        >
+                            Paid
+                        </button>
+                    </div>
+                </div>
+            ))}
+
+            <div style={{ height: '1px', backgroundColor: '#eee', margin: '5px 0' }} />
 
             <button
                 onClick={resetQuiz}

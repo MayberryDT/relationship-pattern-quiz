@@ -95,6 +95,8 @@ export const useQuizStore = create<QuizState>()(
                 },
                 scores: { pattern: 15, driver: 12, reinforcement: 8 },
                 isUnlocked: false,
+                showQuiz: true, // Force view change
+                showTeaser: true, // Force teaser display
                 name: 'Alex',
                 primaryArchetype: 'The Anxious Pursuer',
             }),
@@ -129,9 +131,40 @@ export const useQuizStore = create<QuizState>()(
                 },
                 scores: { pattern: 18, driver: 14, reinforcement: 10 },
                 isUnlocked: true,
+                showQuiz: true, // Force view change
+                showTeaser: false, // Force full report
                 name: 'Alex',
                 primaryArchetype: 'The Anxious Pursuer',
             }),
+
+            devSkipToReport: (archetypeId: string, type: 'free' | 'paid') => {
+                const archetypeFlags: Record<string, string[]> = {
+                    ANXIOUS_PURSUER: ['p_abandonment', 'f_abandon', 'd_pursue', 'ma_intense'],
+                    PROTECTIVE_WITHDRAWER: ['p_avoidant', 'f_enmesh', 'd_withdraw', 'mb_closeness'],
+                    DEVOTED_CARETAKER: ['p_over_giver', 'c_inadequacy', 'mc_security', 'r_giver'],
+                    CHAOS_MAGNET: ['p_intensity', 's_bored', 'me_drama_passion', 'd_escalate'],
+                    INVISIBLE_PARTNER: ['f_deprivation', 'b_secondary', 'ff_invisible', 'mf_dont_ask'],
+                    GUARDED_HEART: ['e_betrayal', 'f_mistrust', 'b_danger', 's_suspicious']
+                };
+
+                const targetFlags = archetypeFlags[archetypeId] || [];
+                const targetArchetype = ARCHETYPES[archetypeId];
+
+                set({
+                    currentQuestionIndex: 999,
+                    flags: targetFlags,
+                    answers: {}, // Minimal mock
+                    reflections: {
+                        'reflection_main': `Mock reflection for ${targetArchetype?.name || archetypeId}. I try to change but the pattern repeats.`
+                    },
+                    scores: { pattern: 20, driver: 15, reinforcement: 10 },
+                    isUnlocked: type === 'paid',
+                    showQuiz: true,
+                    showTeaser: type === 'free',
+                    name: 'Test User',
+                    primaryArchetype: targetArchetype?.name,
+                });
+            },
 
         }),
         {

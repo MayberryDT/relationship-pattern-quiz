@@ -86,4 +86,5 @@ export interface QuizState {
     setSessionId: (id: string) => void;
     devSkipToPaywall: () => void;
     devSkipToResults: () => void;
+    devSkipToReport: (archetypeId: string, type: 'free' | 'paid') => void;
 }
