@@ -1,126 +1,255 @@
-import React, { useState } from 'react';
-import { trackEvent } from '../lib/analytics';
-import { useQuizStore } from '../store/useQuizStore';
+/**
+ * LandingPage Component - Premium Edition
+ * 
+ * Ultra-premium dark theme with:
+ * - Cinematic typography and spacing
+ * - Gold accent highlights
+ * - Subtle animations and micro-interactions
+ * - Glassmorphism elements
+ * - Editorial sophistication
+ */
+
+import React from 'react';
 
 interface LandingPageProps {
     onStartQuiz: () => void;
 }
 
 const LandingPage: React.FC<LandingPageProps> = ({ onStartQuiz }) => {
-    const [isHovering, setIsHovering] = useState(false);
-    const { quizSessionId } = useQuizStore();
-
-    const handleStart = () => {
-        trackEvent(quizSessionId, 'quiz_start', {});
-        onStartQuiz();
-    };
-
     return (
-        <div className="landing-page">
+        <div className="landing-page premium-dark">
+            {/* Ambient Background Glow */}
+            <div className="ambient-glow" aria-hidden="true" />
+
             {/* Hero Section */}
             <section className="landing-hero">
-                <div className="container">
-                    <div className="mono text-secondary mb-4" style={{ letterSpacing: '0.2em' }}>
-                        RELATIONSHIP PATTERN DIAGNOSTIC
-                    </div>
+                <div className="hero-content">
+                    <span className="hero-eyebrow">RELATIONSHIP PATTERN DIAGNOSTIC</span>
 
-                    <h1 className="serif landing-title">
-                        The same relationship.<br />
-                        <em>Different person.</em>
+                    <h1 className="hero-headline">
+                        <span className="headline-line">The same relationship.</span>
+                        <span className="headline-line italic">Different person. Every single time.</span>
                     </h1>
 
-                    <p className="landing-subtitle">
-                        Discover the hidden pattern that keeps repeating—and finally understand why.
+                    <p className="hero-subtext">
+                        You've been here before. The same loop, different face. There's a pattern
+                        running beneath the surface—a blueprint you can't see but can't escape.
                     </p>
 
-                    <button
-                        className="btn-start"
-                        onClick={handleStart}
-                        onMouseEnter={() => setIsHovering(true)}
-                        onMouseLeave={() => setIsHovering(false)}
-                        style={{
-                            transform: isHovering ? 'translateY(-2px)' : 'translateY(0)',
-                        }}
-                    >
-                        Begin Your Diagnostic
-                    </button>
-
-                    <p className="landing-meta mono">
-                        5 minutes • Psychologically grounded • Instant results
+                    <p className="hero-hook">
+                        This diagnostic reveals the <span className="text-gold">exact mechanism</span>:
+                        your core fear, the loop signature, the moment it locks in.
                     </p>
-                </div>
-            </section>
+                    <p className="hero-personalization">
+                        Generated from your answers. Written in full prose. No templates.
+                    </p>
 
-            {/* Trust Indicators */}
-            <section className="landing-trust">
-                <div className="container">
-                    <div className="trust-grid">
-                        <div className="trust-item">
-                            <div className="trust-number">31+</div>
-                            <div className="trust-label">Targeted questions</div>
-                        </div>
-                        <div className="trust-item">
-                            <div className="trust-number">6</div>
-                            <div className="trust-label">Pattern archetypes</div>
-                        </div>
-                        <div className="trust-item">
-                            <div className="trust-number">12</div>
-                            <div className="trust-label">Report sections</div>
-                        </div>
+                    <div className="hero-cta-group">
+                        <button className="btn-premium" onClick={onStartQuiz}>
+                            <span className="btn-text">Reveal My Pattern</span>
+                            <span className="btn-arrow">→</span>
+                        </button>
+                        <p className="cta-microcopy">Private • 5 minutes • Free results</p>
+                    </div>
+
+                    <div className="hero-meta">
+                        <span className="meta-item">
+                            <span className="meta-number">5</span>
+                            <span className="meta-label">Minutes</span>
+                        </span>
+                        <span className="meta-divider" />
+                        <span className="meta-item">
+                            <span className="meta-number">31</span>
+                            <span className="meta-label">Questions</span>
+                        </span>
+                        <span className="meta-divider" />
+                        <span className="meta-item">
+                            <span className="meta-number">4K+</span>
+                            <span className="meta-label">Words</span>
+                        </span>
                     </div>
                 </div>
             </section>
 
-            {/* What You'll Learn */}
-            <section className="landing-learn">
-                <div className="container">
-                    <h2 className="serif section-title">What you'll discover</h2>
+            {/* Scroll Indicator */}
+            <div className="scroll-indicator">
+                <span className="scroll-line" />
+            </div>
 
-                    <div className="learn-grid">
-                        <div className="learn-item">
-                            <div className="learn-icon">◯</div>
-                            <h3 className="serif">Your core pattern</h3>
-                            <p>The unconscious blueprint that shapes how you connect, protect yourself, and ultimately why relationships unfold the way they do.</p>
-                        </div>
+            {/* What You'll Discover */}
+            <section className="landing-section reveals-section">
+                <div className="section-header">
+                    <h2 className="section-title">What the Diagnostic Reveals</h2>
+                </div>
 
-                        <div className="learn-item">
-                            <div className="learn-icon">◯</div>
-                            <h3 className="serif">Your loop signature</h3>
-                            <p>The predictable sequence from first attraction through eventual rupture—and why "knowing better" hasn't been enough to stop it.</p>
+                <div className="reveals-grid">
+                    {[
+                        { num: '01', title: 'Your Core Pattern', desc: 'Why relationships follow the same emotional arc.' },
+                        { num: '02', title: 'The Four-Phase Loop', desc: 'Where things start to go wrong—and why it feels sudden.' },
+                        { num: '03', title: 'Why It Keeps Repeating', desc: 'Why different partners don’t change the ending.' },
+                        { num: '04', title: 'The Internal Contradiction', desc: 'Why wanting closeness creates distance.' },
+                        { num: '05', title: 'Shadow Mechanisms', desc: 'The protection you don’t realize you’re using.' },
+                        { num: '06', title: 'Deep Personalization', desc: '2,000–4,000 words written from your answers.' },
+                    ].map((item) => (
+                        <div key={item.num} className="reveal-card">
+                            <span className="reveal-num">{item.num}</span>
+                            <div className="reveal-body">
+                                <h3 className="reveal-title">{item.title}</h3>
+                                <p className="reveal-desc">{item.desc}</p>
+                            </div>
                         </div>
+                    ))}
+                </div>
+            </section>
 
-                        <div className="learn-item">
-                            <div className="learn-icon">◯</div>
-                            <h3 className="serif">The origin</h3>
-                            <p>Where this pattern was formed, why it made sense then, and why it no longer serves you now.</p>
-                        </div>
+            {/* Methodology Section - Moved Below Reveals */}
+            <section className="landing-section methodology-section">
+                <div className="section-header">
+                    <span className="section-eyebrow">CLINICALLY INFORMED</span>
+                    <h2 className="section-title">
+                        Not pop psychology.<br />
+                        <span className="title-emphasis">A methodology rooted in depth.</span>
+                    </h2>
+                </div>
+
+                <div className="methodology-grid">
+                    <div className="method-card">
+                        <div className="card-accent" />
+                        <h3 className="card-title">Schema Logic</h3>
+                        <p className="card-text">
+                            Identifying the "tinted glasses" of childhood-formed beliefs
+                            that filter every relationship you enter.
+                        </p>
+                    </div>
+                    <div className="method-card">
+                        <div className="card-accent" />
+                        <h3 className="card-title">CCRT Mapping</h3>
+                        <p className="card-text">
+                            Surface your Core Conflictual Relationship Themes—the hidden
+                            scripts running beneath your connections.
+                        </p>
+                    </div>
+                    <div className="method-card">
+                        <div className="card-accent" />
+                        <h3 className="card-title">Attachment Theory</h3>
+                        <p className="card-text">
+                            Decode your survival strategies: pursue, withdraw,
+                            or give until empty.
+                        </p>
                     </div>
                 </div>
             </section>
 
-            {/* Quote / Social Proof */}
-            <section className="landing-quote">
-                <div className="container">
-                    <blockquote className="serif">
-                        "This isn't about fixing you.<br />
-                        It's about finally seeing yourself clearly."
-                    </blockquote>
+            {/* Stats & Quote Section */}
+            <section className="landing-section stats-section">
+                <div className="stats-grid">
+                    <div className="stat-block">
+                        <span className="stat-value">31+</span>
+                        <span className="stat-label">Targeted Questions</span>
+                    </div>
+                    <div className="stat-block">
+                        <span className="stat-value">6</span>
+                        <span className="stat-label">Pattern Archetypes</span>
+                    </div>
+                    <div className="stat-block">
+                        <span className="stat-value">12</span>
+                        <span className="stat-label">Report Sections</span>
+                    </div>
+                    <div className="stat-block">
+                        <span className="stat-value">4K+</span>
+                        <span className="stat-label">Words of Analysis</span>
+                    </div>
+                </div>
+
+                <p className="stats-interpretation">
+                    Enough depth to explain—not just describe—your pattern.
+                </p>
+
+                <blockquote className="featured-quote">
+                    <span className="quote-mark">"</span>
+                    <p>
+                        You're not broken, you're patterned.<br />
+                        And patterns can be changed once they're seen.
+                    </p>
+                </blockquote>
+            </section>
+
+            {/* Differentiation Section */}
+            <section className="landing-section diff-section">
+                <div className="section-header">
+                    <span className="section-eyebrow">SCHEMA THERAPY FRAMEWORK</span>
+                    <h2 className="section-title">What makes this different</h2>
+                </div>
+
+                <div className="diff-list">
+                    <div className="diff-item">
+                        <div className="diff-icon">
+                            <span className="icon-line" />
+                        </div>
+                        <div className="diff-content">
+                            <h3>It doesn't tell you what to do.</h3>
+                            <p>
+                                It tells you what’s actually happening—before the loop runs.
+                            </p>
+                            <p>
+                                Most advice focuses on fixing behavior. This focuses on catching the mechanism—in
+                                the first 10% of the loop, before it runs.
+                            </p>
+                        </div>
+                    </div>
+                    <div className="diff-item">
+                        <div className="diff-icon">
+                            <span className="icon-line" />
+                        </div>
+                        <div className="diff-content">
+                            <h3>It's identity-safe.</h3>
+                            <p>
+                                No labels like "toxic" or "avoidant." Just your pattern's logic,
+                                explained without judgment.
+                            </p>
+                        </div>
+                    </div>
+                    <div className="diff-item">
+                        <div className="diff-icon">
+                            <span className="icon-line" />
+                        </div>
+                        <div className="diff-content">
+                            <h3>It's yours.</h3>
+                            <p>
+                                Not a template. A narrative written from your specific answers,
+                                in full prose.
+                            </p>
+                        </div>
+                    </div>
                 </div>
             </section>
 
             {/* Final CTA */}
-            <section className="landing-cta">
-                <div className="container text-center">
-                    <button
-                        className="btn-start"
-                        onClick={handleStart}
-                    >
-                        Start the Diagnostic
-                    </button>
-                    <p className="mono text-secondary mt-4" style={{ fontSize: '0.7rem' }}>
-                        Free to start • No email required
+            <section className="landing-section final-cta-section">
+                <div className="cta-container">
+                    <h2 className="cta-headline">Ready to see the pattern?</h2>
+                    <p className="cta-subtext">
+                        You've answered these questions before—in your head, in your journal,
+                        in the 3am spiral. But you've never seen them assembled into this.
                     </p>
+
+                    <button className="btn-premium btn-large" onClick={onStartQuiz}>
+                        <span className="btn-text">Begin the Diagnostic</span>
+                        <span className="btn-arrow">→</span>
+                    </button>
+                    <p className="cta-urgency">Seeing the pattern changes how it operates.</p>
+
+                    <div className="cta-trust">
+                        <span>Private & Secure</span>
+                        <span className="trust-dot">·</span>
+                        <span>No Email Required</span>
+                        <span className="trust-dot">·</span>
+                        <span>5 Minutes</span>
+                    </div>
                 </div>
+
+                {/* Decorative bottom gradient */}
+                <div className="bottom-fade" aria-hidden="true" />
             </section>
         </div>
     );

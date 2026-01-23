@@ -3,11 +3,12 @@ import { supabase } from '../lib/supabase';
 import { useQuizStore } from '../store/useQuizStore';
 import ProgressBar from './ProgressBar';
 import QuestionCard from './QuestionCard';
-import ResultsTeaser from './ResultsTeaser';
-import FullReport from './FullReport';
+import FreeReport from './FreeReport';
+import PaidReport from './PaidReport';
 import type { Question, Answer, Phase } from '../types';
 import { PHASE_NAMES } from '../types';
 import { trackEvent } from '../lib/analytics';
+
 
 const QuizView: React.FC = () => {
     const { currentQuestionIndex, addAnswer, addReflection, nextQuestion, answers, isUnlocked, setUnlock, scores, flags, quizSessionId } = useQuizStore();
@@ -126,10 +127,11 @@ const QuizView: React.FC = () => {
 
     if (currentQuestionIndex >= questions.length && questions.length > 0) {
         if (!isUnlocked) {
-            return <ResultsTeaser />;
+            return <FreeReport />;
         }
-        return <FullReport />;
+        return <PaidReport />;
     }
+
 
     const currentQuestion = questions[currentQuestionIndex];
 

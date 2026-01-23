@@ -14,9 +14,7 @@ const ProgressBar: React.FC<ProgressBarProps> = ({ current, total, phase }) => {
             <div className="mono text-secondary">
                 Diagnostic Phase {phase}
             </div>
-            <div className="mono text-secondary">
-                {String(current).padStart(2, '0')} / {String(total).padStart(2, '0')}
-            </div>
+
             <div
                 className="progress-line"
                 style={{ width: `${percentage}%` }}

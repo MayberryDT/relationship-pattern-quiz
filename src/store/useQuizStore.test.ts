@@ -14,7 +14,8 @@ describe('QuizStore Logic', () => {
             text: 'Test',
             weight_pattern: 1.5,
             weight_driver: 0.5,
-            weight_reinforcement: 0
+            weight_reinforcement: 0,
+            flag_set: []
         };
 
         store.addAnswer('q1', mockAnswer);

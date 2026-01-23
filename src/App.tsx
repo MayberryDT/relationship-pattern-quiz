@@ -1,17 +1,19 @@
-import { useState } from 'react';
 import QuizView from './components/QuizView';
 import LandingPage from './components/LandingPage';
+import DevShortcuts from './components/DevShortcuts';
+import { useQuizStore } from './store/useQuizStore';
 
 function App() {
-  const [showQuiz, setShowQuiz] = useState(false);
+  const { showQuiz, startQuiz } = useQuizStore();
 
   return (
     <main>
       {showQuiz ? (
         <QuizView />
       ) : (
-        <LandingPage onStartQuiz={() => setShowQuiz(true)} />
+        <LandingPage onStartQuiz={startQuiz} />
       )}
+      <DevShortcuts />
     </main>
   );
 }

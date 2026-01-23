@@ -68,13 +68,20 @@ export interface QuizState {
     currentQuestionIndex: number;
     isUnlocked: boolean;
     quizSessionId: string;
+    showQuiz: boolean;
+    name?: string; // User's first name for personalization
+    primaryArchetype?: string; // Calculated primary pattern archetype
+
 
     // Actions
     addAnswer: (questionId: string, answer: Answer) => void;
     addReflection: (questionId: string, text: string) => void;
     nextQuestion: () => void;
     prevQuestion: () => void;
+    startQuiz: () => void;
     resetQuiz: () => void;
     setUnlock: (status: boolean) => void;
     setSessionId: (id: string) => void;
+    devSkipToPaywall: () => void;
+    devSkipToResults: () => void;
 }

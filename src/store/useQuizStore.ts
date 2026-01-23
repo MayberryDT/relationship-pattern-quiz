@@ -16,6 +16,8 @@ export const useQuizStore = create<QuizState>()(
             currentQuestionIndex: 0,
             isUnlocked: false,
             quizSessionId: crypto.randomUUID(),
+            showQuiz: false,
+
 
             addAnswer: (questionId: string, answer: Answer) => set((state) => {
                 const newFlags = [...state.flags];
@@ -50,6 +52,11 @@ export const useQuizStore = create<QuizState>()(
                 currentQuestionIndex: Math.max(0, state.currentQuestionIndex - 1),
             })),
 
+            startQuiz: () => set({
+                showQuiz: true,
+                currentQuestionIndex: 0
+            }),
+
             resetQuiz: () => set({
                 scores: { pattern: 0, driver: 0, reinforcement: 0 },
                 flags: [],
@@ -58,10 +65,70 @@ export const useQuizStore = create<QuizState>()(
                 currentQuestionIndex: 0,
                 isUnlocked: false,
                 quizSessionId: crypto.randomUUID(),
+                showQuiz: false,
             }),
 
             setUnlock: (status) => set({ isUnlocked: status }),
             setSessionId: (id) => set({ quizSessionId: id }),
+
+            // Dev methods with comprehensive mock data for testing
+            devSkipToPaywall: () => set({
+                currentQuestionIndex: 999,
+                flags: [
+                    'p_abandonment', 'e_too_much', 'f_abandon', 'd_pursue',
+                    'a_unavailable', 'r_pursuer', 't_pursuit', 'c_dependency',
+                    'ff_dread', 'pw_pursue', 's_suspicious', 'ma_intense'
+                ],
+                answers: {
+                    'q1': 'a1_anxious',
+                    'q2': 'a2_pursue',
+                    'q3': 'a3_fear',
+                    'q4': 'a4_unavailable',
+                    'q5': 'a5_intense'
+                },
+                reflections: {
+                    'reflection_1': 'I always seem to fall for people who keep me at arm\'s length. The more distant they become, the more desperate I feel to close the gap.'
+                },
+                scores: { pattern: 15, driver: 12, reinforcement: 8 },
+                isUnlocked: false,
+                name: 'Alex',
+                primaryArchetype: 'The Anxious Pursuer',
+            }),
+
+            devSkipToResults: () => set({
+                currentQuestionIndex: 999,
+                flags: [
+                    'p_abandonment', 'e_too_much', 'f_abandon', 'd_pursue',
+                    'a_unavailable', 'r_pursuer', 't_pursuit', 'c_dependency',
+                    'ff_dread', 'pw_pursue', 's_suspicious', 'ma_intense',
+                    'ma_shame', 'ct_chosen_push', 'b_toomuch'
+                ],
+                answers: {
+                    'pattern_recognition': 'anxious_pursuit',
+                    'ending_theme': 'too_much',
+                    'attraction_pattern': 'unavailable',
+                    'role_in_relationship': 'pursuer',
+                    'fear_response': 'abandonment',
+                    'threat_response': 'pursue_harder',
+                    'core_fear': 'being_left',
+                    'belief_about_love': 'too_much_for_people',
+                    'familiar_feeling': 'dread_of_loss',
+                    'distance_response': 'panic_and_pursue',
+                    'stability_response': 'suspicious_testing',
+                    'intensity_need': 'very_high',
+                    'shame_after_pursuit': 'yes',
+                    'contradiction': 'want_chosen_but_push_away'
+                },
+                reflections: {
+                    'reflection_main': 'I know I can be too much. I feel it happening—the texts, the checking, the need for reassurance—and I can\'t stop. It\'s like watching myself drive someone away in slow motion.',
+                    'reflection_origin': 'My father left when I was seven. No warning, no explanation. I think part of me is still that kid, waiting for everyone to leave.'
+                },
+                scores: { pattern: 18, driver: 14, reinforcement: 10 },
+                isUnlocked: true,
+                name: 'Alex',
+                primaryArchetype: 'The Anxious Pursuer',
+            }),
+
         }),
         {
             name: 'quiz-storage',
@@ -73,6 +140,7 @@ export const useQuizStore = create<QuizState>()(
                 currentQuestionIndex: state.currentQuestionIndex,
                 isUnlocked: state.isUnlocked,
                 quizSessionId: state.quizSessionId,
+                showQuiz: state.showQuiz,
             }),
         }
     )

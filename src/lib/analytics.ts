@@ -6,7 +6,10 @@ export type EventType =
     | 'question_answered'
     | 'quiz_complete'
     | 'checkout_click'
-    | 'report_view';
+    | 'report_view'
+    | 'paid_report_view'
+    | 'report_download';
+
 
 export const trackEvent = async (sessionId: string, eventType: EventType, eventData: Record<string, any> = {}) => {
     try {
