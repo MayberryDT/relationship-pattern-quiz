@@ -168,7 +168,7 @@ const PaidReport: React.FC = () => {
 
             <footer className="report-footer no-print">
                 <div className="footer-left">
-                    <div className="mono text-secondary mb-4">Diagnostic Complete</div>
+                    <div className="mono text-secondary mb-4">Report Complete</div>
                     <p className="text-sm text-secondary max-w-xs">
                         This report represents a snapshot based on your responses at this time.
                         Patterns can shift and change with awareness and experience.

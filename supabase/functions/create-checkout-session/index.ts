@@ -35,6 +35,9 @@ serve(async (req) => {
             allow_promotion_codes: true,
             success_url: `${req.headers.get('origin')}/?success=true`,
             cancel_url: `${req.headers.get('origin')}/?canceled=true`,
+            metadata: {
+                app: "relationship_quiz"
+            }
         })
 
         return new Response(

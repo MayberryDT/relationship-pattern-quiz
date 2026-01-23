@@ -24,7 +24,7 @@ const LandingPage: React.FC<LandingPageProps> = ({ onStartQuiz }) => {
             {/* Hero Section */}
             <section className="landing-hero">
                 <div className="hero-content">
-                    <span className="hero-eyebrow">RELATIONSHIP PATTERN DIAGNOSTIC</span>
+                    <span className="hero-eyebrow">RELATIONSHIP PATTERN REPORT</span>
 
                     <h1 className="hero-headline">
                         <span className="headline-line">The same relationship.</span>
@@ -37,7 +37,7 @@ const LandingPage: React.FC<LandingPageProps> = ({ onStartQuiz }) => {
                     </p>
 
                     <p className="hero-hook">
-                        This diagnostic reveals the <span className="text-gold">exact mechanism</span>:
+                        This report reveals the <span className="text-gold">exact mechanism</span>:
                         your core fear, the loop signature, and the moment it locks in.
                     </p>
                     <p className="hero-personalization">
@@ -79,7 +79,7 @@ const LandingPage: React.FC<LandingPageProps> = ({ onStartQuiz }) => {
             {/* What You'll Discover */}
             <section className="landing-section reveals-section">
                 <div className="section-header">
-                    <h2 className="section-title">What the Diagnostic Reveals</h2>
+                    <h2 className="section-title">What the Report Reveals</h2>
                 </div>
 
                 <div className="reveals-grid">
@@ -234,7 +234,7 @@ const LandingPage: React.FC<LandingPageProps> = ({ onStartQuiz }) => {
                     </p>
 
                     <button className="btn-premium btn-large" onClick={onStartQuiz}>
-                        <span className="btn-text">Begin the Diagnostic</span>
+                        <span className="btn-text">Begin the Report</span>
                         <span className="btn-arrow">→</span>
                     </button>
                     <p className="cta-urgency">Seeing the pattern changes how it operates.</p>

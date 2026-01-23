@@ -225,7 +225,7 @@ const ResultsTeaser: React.FC = () => {
                     backgroundColor: 'rgba(0,0,0,0.02)'
                 }}>
                     <div className="mono" style={{ fontSize: '0.75rem', fontWeight: 'bold', marginBottom: '1rem' }}>
-                        DIAGNOSTIC STATUS
+                        REPORT STATUS
                     </div>
                     <p className="serif" style={{ margin: 0, fontSize: '1rem', lineHeight: '1.6' }}>
                         <strong>Status:</strong> Your primary pattern is identified.<br />
