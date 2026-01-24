@@ -20,12 +20,6 @@ declare global {
     }
 }
 
-interface TikTokContent {
-    content_id: string;
-    content_type: 'product' | 'product_group';
-    content_name: string;
-}
-
 /**
  * Send event to server-side TikTok Events API
  */
