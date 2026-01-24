@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useQuizStore, getRecommendedClusters, getPatternArchetype } from '../store/useQuizStore';
 import { trackEvent } from '../lib/analytics';
+import { trackInitiateCheckout } from '../lib/tiktokPixel';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import { Lock } from 'lucide-react';
@@ -87,6 +88,15 @@ const ResultsTeaser: React.FC = () => {
             product: 'Full Report',
             archetype: archetype?.primary.id
         });
+
+        // Track TikTok InitiateCheckout event
+        trackInitiateCheckout(
+            'full-report',
+            `Full Report - ${archetype?.primary.name || 'Unknown'}`,
+            9.99,
+            { archetype: archetype?.primary.id, sessionId: quizSessionId }
+        );
+
         try {
             const { data, error } = await supabase.functions.invoke('create-checkout-session', {
                 body: {

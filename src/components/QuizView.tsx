@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { supabase } from '../lib/supabase';
-import { useQuizStore } from '../store/useQuizStore';
+import { useQuizStore, getPatternArchetype } from '../store/useQuizStore';
 import ProgressBar from './ProgressBar';
 import QuestionCard from './QuestionCard';
 import ResultsTeaser from './ResultsTeaser';
@@ -8,6 +8,7 @@ import PaidReport from './PaidReport';
 import type { Question, Answer, Phase } from '../types';
 import { PHASE_NAMES } from '../types';
 import { trackEvent } from '../lib/analytics';
+import { trackCompleteRegistration, trackPurchase } from '../lib/tiktokPixel';
 
 
 const QuizView: React.FC = () => {
@@ -17,6 +18,7 @@ const QuizView: React.FC = () => {
     const [loading, setLoading] = useState(true);
     const [selectedAnswer, setSelectedAnswer] = useState<Answer | null>(null);
     const [lastPhase, setLastPhase] = useState<string | null>(null);
+    const [hasTrackedCompletion, setHasTrackedCompletion] = useState(false);
 
     const shouldShowQuestion = (question: Question) => {
         const logic = question.gating_logic;
@@ -45,9 +47,19 @@ const QuizView: React.FC = () => {
         const query = new URLSearchParams(window.location.search);
         if (query.get('success')) {
             setUnlock(true);
+
+            // Track purchase completion
+            const archetype = getPatternArchetype(flags);
+            trackPurchase(
+                'full-report',
+                `Full Report - ${archetype.primary.name}`,
+                9.99,
+                { archetype: archetype.primary.id, sessionId: quizSessionId }
+            );
+
             window.history.replaceState({}, document.title, window.location.pathname);
         }
-    }, [setUnlock]);
+    }, [setUnlock, flags, quizSessionId]);
 
     useEffect(() => {
         const fetchQuestions = async () => {
@@ -100,6 +112,24 @@ const QuizView: React.FC = () => {
         fetchAnswers();
         setSelectedAnswer(null);
     }, [questions, currentQuestionIndex, flags, scores, lastPhase, quizSessionId]);
+
+    // Track quiz completion when user reaches the end
+    useEffect(() => {
+        if (
+            currentQuestionIndex >= questions.length &&
+            questions.length > 0 &&
+            !isUnlocked &&
+            !hasTrackedCompletion
+        ) {
+            const archetype = getPatternArchetype(flags);
+            trackCompleteRegistration(
+                'quiz-complete',
+                `Quiz Completed - ${archetype.primary.name}`,
+                9.99
+            );
+            setHasTrackedCompletion(true);
+        }
+    }, [currentQuestionIndex, questions.length, isUnlocked, hasTrackedCompletion, flags]);
 
     const handleSelect = (answer: Answer) => {
         setSelectedAnswer(answer);

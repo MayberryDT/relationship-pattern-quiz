@@ -9,13 +9,19 @@
  * - Editorial sophistication
  */
 
-import React from 'react';
+import React, { useEffect } from 'react';
+import { trackViewContent } from '../lib/tiktokPixel';
 
 interface LandingPageProps {
     onStartQuiz: () => void;
 }
 
 const LandingPage: React.FC<LandingPageProps> = ({ onStartQuiz }) => {
+    // Track landing page view
+    useEffect(() => {
+        trackViewContent('relationship-diagnostic', 'Relationship Pattern Diagnostic');
+    }, []);
+
     return (
         <div className="landing-page premium-dark">
             {/* Ambient Background Glow */}
