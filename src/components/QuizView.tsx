@@ -136,17 +136,64 @@ const QuizView: React.FC = () => {
         setSelectedAnswer(answer);
     };
 
+    // Track session on mount
+    useEffect(() => {
+        if (quizSessionId) {
+            // Parse UTM params
+            const params = new URLSearchParams(window.location.search);
+            const utmParams: Record<string, string> = {};
+            ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content'].forEach(key => {
+                const val = params.get(key);
+                if (val) utmParams[key] = val;
+            });
+
+            import('../lib/tracking').then(({ trackingService }) => {
+                trackingService.initSession(quizSessionId, utmParams);
+            });
+        }
+    }, [quizSessionId]);
+
+    // Track time spent on question
+    const startTimeRef = React.useRef<number>(Date.now());
+
+    useEffect(() => {
+        startTimeRef.current = Date.now();
+    }, [currentQuestionIndex]);
+
     const handleContinue = () => {
         const currentQuestion = questions[currentQuestionIndex];
         if (selectedAnswer && currentQuestion) {
+            const timeSpent = Date.now() - startTimeRef.current;
+
+            // Legacy analytics
             trackEvent(quizSessionId, 'question_answered', {
                 question_id: currentQuestion.id,
                 answer_id: selectedAnswer.id
             });
+
+            // New granular tracking
             if (currentQuestion.type === 'text') {
                 addReflection(currentQuestion.id, selectedAnswer.text);
+                import('../lib/tracking').then(({ trackingService }) => {
+                    trackingService.recordAnswer(
+                        quizSessionId,
+                        currentQuestion.id,
+                        selectedAnswer.id,
+                        selectedAnswer.text,
+                        timeSpent
+                    );
+                });
             } else {
                 addAnswer(currentQuestion.id, selectedAnswer);
+                import('../lib/tracking').then(({ trackingService }) => {
+                    trackingService.recordAnswer(
+                        quizSessionId,
+                        currentQuestion.id,
+                        selectedAnswer.id,
+                        '',
+                        timeSpent
+                    );
+                });
             }
             nextQuestion();
         }
