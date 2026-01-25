@@ -15,6 +15,9 @@ lerna-debug.log*
 .env.test
 .env*.local
 
+# Skills with sensitive API keys
+.agent/skills/implement-gemini-api/
+
 node_modules
 dist
 dist-ssr
