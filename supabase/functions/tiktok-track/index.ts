@@ -86,40 +86,56 @@ Deno.serve(async (req: Request) => {
             }],
         };
 
-        // Add test event code if provided
         if (payload.test_event_code) {
             tiktokPayload.test_event_code = payload.test_event_code;
         }
 
-        console.log("Sending to TikTok:", JSON.stringify(tiktokPayload));
+        console.log(`Sending ${payload.event} to TikTok...`);
 
-        const response = await fetch(TIKTOK_EVENTS_API_URL, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                "Access-Token": accessToken,
-            },
-            body: JSON.stringify(tiktokPayload),
-        });
+        // Use AbortController for a 5 second timeout
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 8000);
 
-        const responseData = await response.json();
-        console.log("TikTok response:", response.status, JSON.stringify(responseData));
+        try {
+            const response = await fetch(TIKTOK_EVENTS_API_URL, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Access-Token": accessToken,
+                },
+                body: JSON.stringify(tiktokPayload),
+                signal: controller.signal
+            });
 
-        if (!response.ok || responseData.code !== 0) {
-            console.error("TikTok API error:", responseData);
+            clearTimeout(timeoutId);
+            const responseData = await response.json();
+
+            if (!response.ok || responseData.code !== 0) {
+                console.error("TikTok API error:", JSON.stringify(responseData));
+                return new Response(
+                    JSON.stringify({ error: "TikTok API error", details: responseData }),
+                    { status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+                );
+            }
+
             return new Response(
-                JSON.stringify({ error: "TikTok API error", details: responseData }),
-                { status: response.status === 200 ? 400 : response.status, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+                JSON.stringify({ success: true, event: payload.event }),
+                { status: 200, headers: { ...corsHeaders, "Content-Type": "application/json" } }
             );
+        } catch (fetchError) {
+            clearTimeout(timeoutId);
+            if (fetchError.name === 'AbortError') {
+                console.error("TikTok API timeout after 8s");
+                return new Response(
+                    JSON.stringify({ error: "TikTok API timeout" }),
+                    { status: 504, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+                );
+            }
+            throw fetchError;
         }
 
-        return new Response(
-            JSON.stringify({ success: true, event: payload.event, response: responseData }),
-            { status: 200, headers: { ...corsHeaders, "Content-Type": "application/json" } }
-        );
-
     } catch (error) {
-        console.error("Error:", error);
+        console.error("Internal Error:", error);
         return new Response(
             JSON.stringify({ error: "Internal server error", message: String(error) }),
             { status: 500, headers: { ...corsHeaders, "Content-Type": "application/json" } }
