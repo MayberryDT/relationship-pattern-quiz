@@ -73,6 +73,7 @@ export interface QuizState {
     setShowTeaser: (show: boolean) => void;
     name?: string; // User's first name for personalization
     primaryArchetype?: string; // Calculated primary pattern archetype
+    utmParams: Record<string, string>; // UTM and click ID tracking params
 
 
     // Actions
@@ -84,6 +85,7 @@ export interface QuizState {
     resetQuiz: () => void;
     setUnlock: (status: boolean) => void;
     setSessionId: (id: string) => void;
+    setUtmParams: (params: Record<string, string>) => void;
     devSkipToPaywall: () => void;
     devSkipToResults: () => void;
     devSkipToReport: (archetypeId: string, type: 'free' | 'paid') => void;

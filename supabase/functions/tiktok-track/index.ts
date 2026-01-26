@@ -21,6 +21,7 @@ interface TikTokEventPayload {
             url?: string;
             referrer?: string;
         };
+        ttclid?: string; // TikTok Click ID for attribution
     };
     test_event_code?: string;
 }
@@ -59,31 +60,41 @@ Deno.serve(async (req: Request) => {
         const userAgent = req.headers.get("user-agent") || "";
 
         // Build correct TikTok Events API payload format
+        // Per TikTok API docs: ttclid goes in ad.callback, not user object
+        const eventData: any = {
+            event: payload.event,
+            event_time: Math.floor(Date.now() / 1000),
+            event_id: payload.event_id || crypto.randomUUID(),
+            user: {
+                ip: clientIp,
+                user_agent: userAgent,
+            },
+            page: {
+                url: payload.context?.page?.url || "",
+                referrer: payload.context?.page?.referrer || "",
+            },
+            properties: {
+                contents: payload.properties?.content_id ? [{
+                    content_id: payload.properties.content_id,
+                    content_type: payload.properties.content_type || "product",
+                    content_name: payload.properties.content_name || "",
+                }] : undefined,
+                value: payload.properties?.value,
+                currency: payload.properties?.currency || "USD",
+            },
+        };
+
+        // Add TikTok Click ID in the correct location (ad.callback)
+        if (payload.context?.ttclid) {
+            eventData.ad = {
+                callback: payload.context.ttclid,
+            };
+        }
+
         const tiktokPayload: any = {
             event_source: "web",
             event_source_id: TIKTOK_PIXEL_ID,
-            data: [{
-                event: payload.event,
-                event_time: Math.floor(Date.now() / 1000),
-                event_id: payload.event_id || crypto.randomUUID(),
-                user: {
-                    ip: clientIp,
-                    user_agent: userAgent,
-                },
-                page: {
-                    url: payload.context?.page?.url || "",
-                    referrer: payload.context?.page?.referrer || "",
-                },
-                properties: {
-                    contents: payload.properties?.content_id ? [{
-                        content_id: payload.properties.content_id,
-                        content_type: payload.properties.content_type || "product",
-                        content_name: payload.properties.content_name || "",
-                    }] : undefined,
-                    value: payload.properties?.value,
-                    currency: payload.properties?.currency || "USD",
-                },
-            }],
+            data: [eventData],
         };
 
         if (payload.test_event_code) {
@@ -122,9 +133,9 @@ Deno.serve(async (req: Request) => {
                 JSON.stringify({ success: true, event: payload.event }),
                 { status: 200, headers: { ...corsHeaders, "Content-Type": "application/json" } }
             );
-        } catch (fetchError) {
+        } catch (fetchError: unknown) {
             clearTimeout(timeoutId);
-            if (fetchError.name === 'AbortError') {
+            if (fetchError instanceof Error && fetchError.name === 'AbortError') {
                 console.error("TikTok API timeout after 8s");
                 return new Response(
                     JSON.stringify({ error: "TikTok API timeout" }),

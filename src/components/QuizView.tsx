@@ -13,7 +13,7 @@ const ResultsTeaser = React.lazy(() => import('./ResultsTeaser'));
 const PaidReport = React.lazy(() => import('./PaidReport'));
 
 const QuizView: React.FC = () => {
-    const { currentQuestionIndex, addAnswer, addReflection, nextQuestion, answers, isUnlocked, setUnlock, scores, flags, quizSessionId } = useQuizStore();
+    const { currentQuestionIndex, addAnswer, addReflection, nextQuestion, answers, isUnlocked, setUnlock, scores, flags, quizSessionId, utmParams } = useQuizStore();
     const [questions, setQuestions] = useState<Question[]>([]);
     const [currentAnswers, setCurrentAnswers] = useState<Answer[]>([]);
     const [loading, setLoading] = useState(true);
@@ -136,22 +136,15 @@ const QuizView: React.FC = () => {
         setSelectedAnswer(answer);
     };
 
-    // Track session on mount
+    // Track session on mount - use UTM params captured by App.tsx
     useEffect(() => {
         if (quizSessionId) {
-            // Parse UTM params
-            const params = new URLSearchParams(window.location.search);
-            const utmParams: Record<string, string> = {};
-            ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content'].forEach(key => {
-                const val = params.get(key);
-                if (val) utmParams[key] = val;
-            });
-
+            // Use utmParams from store (captured on initial page load by App.tsx)
             import('../lib/tracking').then(({ trackingService }) => {
                 trackingService.initSession(quizSessionId, utmParams);
             });
         }
-    }, [quizSessionId]);
+    }, [quizSessionId, utmParams]);
 
     // Track time spent on question
     const startTimeRef = React.useRef<number>(Date.now());

@@ -19,6 +19,7 @@ export const useQuizStore = create<QuizState>()(
             quizSessionId: generateUUID(),
             showQuiz: false,
             showTeaser: false,
+            utmParams: {}, // Store UTM params from initial page load
 
 
             addAnswer: (questionId: string, answer: Answer) => set((state) => {
@@ -74,6 +75,7 @@ export const useQuizStore = create<QuizState>()(
             setUnlock: (status) => set({ isUnlocked: status }),
             setSessionId: (id) => set({ quizSessionId: id }),
             setShowTeaser: (show) => set({ showTeaser: show }),
+            setUtmParams: (params) => set({ utmParams: params }),
 
             // Dev methods with comprehensive mock data for testing
             devSkipToPaywall: () => set({
@@ -179,6 +181,7 @@ export const useQuizStore = create<QuizState>()(
                 quizSessionId: state.quizSessionId,
                 showQuiz: state.showQuiz,
                 showTeaser: state.showTeaser,
+                utmParams: state.utmParams, // Persist UTM params across refreshes
             }),
         }
     )

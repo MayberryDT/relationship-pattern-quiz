@@ -36,6 +36,10 @@ const trackServerSide = async (
     testEventCode?: string
 ) => {
     try {
+        // Extract TikTok Click ID from URL for better attribution
+        const params = new URLSearchParams(window.location.search);
+        const ttclid = params.get('ttclid');
+
         const payload: any = {
             event,
             event_id: crypto.randomUUID(),
@@ -46,6 +50,7 @@ const trackServerSide = async (
                     url: window.location.href,
                     referrer: document.referrer,
                 },
+                ttclid: ttclid || undefined, // Include TikTok Click ID if available
             },
         };
 
@@ -61,12 +66,13 @@ const trackServerSide = async (
         if (error) {
             console.warn('[TikTok Server-Side] Failed to send event:', error);
         } else {
-            console.log(`[TikTok Server-Side] ${event} tracked successfully${testEventCode ? ` (test: ${testEventCode})` : ''}`);
+            console.log(`[TikTok Server-Side] ${event} tracked successfully${testEventCode ? ` (test: ${testEventCode})` : ''}${ttclid ? ` (ttclid: ${ttclid})` : ''}`);
         }
     } catch (err) {
         console.warn('[TikTok Server-Side] Failed to track:', err);
     }
 }
+
 
 /**
  * Track ViewContent event - Landing page views, product views
