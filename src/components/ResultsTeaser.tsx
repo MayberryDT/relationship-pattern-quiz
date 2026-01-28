@@ -84,7 +84,7 @@ const ResultsTeaser: React.FC = () => {
 
     const handleUnlock = async () => {
         trackEvent(quizSessionId, 'checkout_click', {
-            price: '$9.99',
+            price: '$4.95',
             product: 'Full Report',
             archetype: archetype?.primary.id
         });
@@ -93,14 +93,14 @@ const ResultsTeaser: React.FC = () => {
         trackInitiateCheckout(
             'full-report',
             `Full Report - ${archetype?.primary.name || 'Unknown'}`,
-            9.99,
+            4.95,
             { archetype: archetype?.primary.id, sessionId: quizSessionId }
         );
 
         try {
             const { data, error } = await supabase.functions.invoke('create-checkout-session', {
                 body: {
-                    priceId: 'price_1SsaAxGreyv23Im6pF4pJzyJ',
+                    priceId: 'price_1SuPwdGreyv23Im64K7JlHeW',
                     quizSessionId: quizSessionId
                 }
             });
@@ -338,14 +338,14 @@ const ResultsTeaser: React.FC = () => {
                         fontSize: '1rem',
                         opacity: 0.6
                     }}>
-                        $29
+                        $9.99
                     </span>
                     <span className="serif" style={{
                         fontSize: '1.5rem',
                         fontWeight: 'bold',
                         color: 'var(--text-primary)'
                     }}>
-                        $9.99
+                        $4.95
                     </span>
                 </div>
 

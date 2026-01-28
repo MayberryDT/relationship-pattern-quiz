@@ -54,7 +54,7 @@ const QuizView: React.FC = () => {
             trackPurchase(
                 'full-report',
                 `Full Report - ${archetype.primary.name}`,
-                9.99,
+                4.95,
                 { archetype: archetype.primary.id, sessionId: quizSessionId }
             );
 
@@ -126,7 +126,7 @@ const QuizView: React.FC = () => {
             trackCompleteRegistration(
                 'quiz-complete',
                 `Quiz Completed - ${archetype.primary.name}`,
-                9.99
+                4.95
             );
             setHasTrackedCompletion(true);
         }

@@ -13,7 +13,7 @@ const TEST_EVENT_CODE = 'TEST93032';
  */
 export const testViewContent = () => {
     console.log('🧪 Testing ViewContent event...');
-    trackViewContent('test-product', 'Test Product View', 9.99, TEST_EVENT_CODE);
+    trackViewContent('test-product', 'Test Product View', 4.95, TEST_EVENT_CODE);
 };
 
 /**
@@ -21,7 +21,7 @@ export const testViewContent = () => {
  */
 export const testCompleteRegistration = () => {
     console.log('🧪 Testing CompleteRegistration event...');
-    trackCompleteRegistration('test-quiz', 'Test Quiz Complete', 9.99, TEST_EVENT_CODE);
+    trackCompleteRegistration('test-quiz', 'Test Quiz Complete', 4.95, TEST_EVENT_CODE);
 };
 
 /**
@@ -29,7 +29,7 @@ export const testCompleteRegistration = () => {
  */
 export const testInitiateCheckout = () => {
     console.log('🧪 Testing InitiateCheckout event...');
-    trackInitiateCheckout('test-checkout', 'Test Checkout', 9.99, { test: true }, TEST_EVENT_CODE);
+    trackInitiateCheckout('test-checkout', 'Test Checkout', 4.95, { test: true }, TEST_EVENT_CODE);
 };
 
 /**
@@ -37,7 +37,7 @@ export const testInitiateCheckout = () => {
  */
 export const testPurchase = () => {
     console.log('🧪 Testing Purchase event...');
-    trackPurchase('test-purchase', 'Test Purchase', 9.99, { test: true }, TEST_EVENT_CODE);
+    trackPurchase('test-purchase', 'Test Purchase', 4.95, { test: true }, TEST_EVENT_CODE);
 };
 
 /**

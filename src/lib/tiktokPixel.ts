@@ -79,7 +79,7 @@ const trackServerSide = async (
  * Sends to both browser pixel and server API
  * @param testEventCode - Optional test event code for TikTok testing (e.g., 'TEST93032')
  */
-export const trackViewContent = (contentId: string, contentName: string, value: number = 9.99, testEventCode?: string) => {
+export const trackViewContent = (contentId: string, contentName: string, value: number = 4.95, testEventCode?: string) => {
     // Browser-side tracking
     if (window.ttq) {
         window.ttq.track('ViewContent', {
@@ -113,7 +113,7 @@ export const trackViewContent = (contentId: string, contentName: string, value: 
  * Sends to both browser pixel and server API
  * @param testEventCode - Optional test event code for TikTok testing (e.g., 'TEST93032')
  */
-export const trackCompleteRegistration = (contentId: string, contentName: string, value: number = 9.99, testEventCode?: string) => {
+export const trackCompleteRegistration = (contentId: string, contentName: string, value: number = 4.95, testEventCode?: string) => {
     // Browser-side tracking
     if (window.ttq) {
         window.ttq.track('CompleteRegistration', {
@@ -147,7 +147,7 @@ export const trackCompleteRegistration = (contentId: string, contentName: string
  * Sends to both browser pixel and server API
  * @param testEventCode - Optional test event code for TikTok testing (e.g., 'TEST93032')
  */
-export const trackInitiateCheckout = (contentId: string, contentName: string, value: number = 9.99, additionalData?: Record<string, any>, testEventCode?: string) => {
+export const trackInitiateCheckout = (contentId: string, contentName: string, value: number = 4.95, additionalData?: Record<string, any>, testEventCode?: string) => {
     // Browser-side tracking
     if (window.ttq) {
         window.ttq.track('InitiateCheckout', {
@@ -183,7 +183,7 @@ export const trackInitiateCheckout = (contentId: string, contentName: string, va
  * Sends to both browser pixel and server API
  * @param testEventCode - Optional test event code for TikTok testing (e.g., 'TEST93032')
  */
-export const trackPurchase = (contentId: string, contentName: string, value: number = 9.99, additionalData?: Record<string, any>, testEventCode?: string) => {
+export const trackPurchase = (contentId: string, contentName: string, value: number = 4.95, additionalData?: Record<string, any>, testEventCode?: string) => {
     // Browser-side tracking
     if (window.ttq) {
         window.ttq.track('Purchase', {
